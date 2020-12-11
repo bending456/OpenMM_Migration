@@ -17,7 +17,7 @@ from scipy import special
 ```
 
 ### Error function based diffusion 
-- 
+- In this simulation there are three modes of calculation scheme for diffusion of chemoattractant substance in the background. One of three is error function based on the steady state diffusion in 1D. 
 ```python
 ############################
 #### Diffusion function ####
