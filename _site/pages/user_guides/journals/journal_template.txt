@@ -1,0 +1,16 @@
+#### Today's Date
+Dec-12-2020
+
+--------------------------------------------------------------------------------
+## Main Task
+
+### 1. What was the major task #1
+#### Task Detail 
+- here is what i did 
+
+### 2. What was the major task #2
+#### Task Detail
+- here is what i did 
+
+----------------------------------------------------------
+[Note]

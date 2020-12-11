@@ -1,0 +1,458 @@
+<!DOCTYPE html> <html lang="en-US"> <head> <meta charset="UTF-8"> <meta http-equiv="X-UA-Compatible" content="IE=Edge"> <title>calculator.py File - Macrophage - Pathway Analysis in Python</title> <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"> <link rel="stylesheet" href="/assets/css/just-the-docs-default.css"> <script type="text/javascript" src="/assets/js/vendor/lunr.min.js"></script> <script type="text/javascript" src="/assets/js/just-the-docs.js"></script> <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Begin Jekyll SEO tag v2.6.1 --> <title>calculator.py File | Macrophage - Pathway Analysis in Python</title> <meta name="generator" content="Jekyll v3.9.0" /> <meta property="og:title" content="calculator.py File" /> <meta property="og:locale" content="en_US" /> <link rel="canonical" href="http://localhost:4000/pages/user_guides/PythonScript/calculator.html" /> <meta property="og:url" content="http://localhost:4000/pages/user_guides/PythonScript/calculator.html" /> <meta property="og:site_name" content="Macrophage - Pathway Analysis in Python" /> <script type="application/ld+json"> {"@type":"WebPage","headline":"calculator.py File","url":"http://localhost:4000/pages/user_guides/PythonScript/calculator.html","@context":"https://schema.org"}</script> <!-- End Jekyll SEO tag --> </head> <body> <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"> <symbol id="svg-link" viewBox="0 0 24 24"> <title>Link</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path> </svg> </symbol> <symbol id="svg-search" viewBox="0 0 24 24"> <title>Search</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"> <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line> </svg> </symbol> <symbol id="svg-menu" viewBox="0 0 24 24"> <title>Menu</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"> <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line> </svg> </symbol> <symbol id="svg-arrow-right" viewBox="0 0 24 24"> <title>Expand</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"> <polyline points="9 18 15 12 9 6"></polyline> </svg> </symbol> <symbol id="svg-doc" viewBox="0 0 24 24"> <title>Document</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"> <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline> </svg> </symbol> </svg> <div class="side-bar"> <div class="site-header"> <a href="http://localhost:4000/" class="site-title lh-tight"> Macrophage - Pathway Analysis in Python </a> <a href="#" id="menu-button" class="site-button"> <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg> </a> </div> <nav role="navigation" aria-label="Main" id="site-nav" class="site-nav"> <ul class="nav-list"><li class="nav-list-item"><a href="http://localhost:4000/" class="nav-list-link">Introduction</a></li><li class="nav-list-item"><a href="http://localhost:4000/pages/user_guides/installation.html" class="nav-list-link">Installation of OpenMM and FeedInForce</a></li><li class="nav-list-item active"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/pages/user_guides/python.html" class="nav-list-link">What's in Python Files?</a><ul class="nav-list "><li class="nav-list-item "><a href="http://localhost:4000/pages/user_guides/PythonScript/concentration.html" class="nav-list-link">concentration.py File</a></li><li class="nav-list-item active"><a href="http://localhost:4000/pages/user_guides/PythonScript/calculator.html" class="nav-list-link active">calculator.py File</a></li><li class="nav-list-item "><a href="http://localhost:4000/pages/user_guides/PythonScript/runner.html" class="nav-list-link">runner.py File</a></li><li class="nav-list-item "><a href="http://localhost:4000/pages/user_guides/PythonScript/operator.html" class="nav-list-link">operator.py File</a></li></ul></li><li class="nav-list-item"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="http://localhost:4000/pages/user_guides/journal.html" class="nav-list-link">Work Log</a><ul class="nav-list "><li class="nav-list-item "><a href="http://localhost:4000/pages/user_guides/journals/1_201212.html" class="nav-list-link">12/12/2020</a></li></ul></li></ul> </nav> <footer class="site-footer"> This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll. </footer> </div> <div class="main" id="top"> <div id="main-header" class="main-header"> <div class="search"> <div class="search-input-wrap"> <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search Macrophage - Pathway Analysis in Python" aria-label="Search Macrophage - Pathway Analysis in Python" autocomplete="off"> <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label> </div> <div id="search-results" class="search-results"></div> </div> <nav aria-label="Auxiliary" class="aux-nav"> <ul class="aux-nav-list"> <li class="aux-nav-list-item"> <a href="https://colab.research.google.com/notebooks/intro.ipynb" class="site-button" > Colaboratory Link </a> </li> </ul> </nav> </div> <div id="main-content-wrap" class="main-content-wrap"> <nav aria-label="Breadcrumb" class="breadcrumb-nav"> <ol class="breadcrumb-nav-list"> <li class="breadcrumb-nav-list-item"><a href="http://localhost:4000/pages/user_guides/python.html">What's in Python Files?</a></li> <li class="breadcrumb-nav-list-item"><span>calculator.py File</span></li> </ol> </nav> <div id="main-content" class="main-content" role="main"> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">########################################################
+#### Sub functions that need for FeedInForce plugin ####
+#### Writtne by Ben chun ###############################
+########################################################
+</span>
+<span class="kn">from</span> <span class="nn">simtk.unit</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">simtk.openmm</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">simtk.openmm.app</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">stdout</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">FeedInplugin</span> <span class="kn">import</span> <span class="n">FeedInForce</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">seed</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="kn">import</span> <span class="nn">concentration</span> <span class="k">as</span> <span class="n">conc</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">odeint</span>
+<span class="kn">import</span> <span class="nn">yaml</span> 
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">###########################################################################
+###                           PDB Generator                             ###
+###########################################################################
+</span><span class="k">def</span> <span class="nf">PDBgenNoPBC</span><span class="p">(</span><span class="n">PDBfileName</span><span class="p">,</span>
+                <span class="n">NoCell1</span><span class="p">,</span>
+                <span class="n">NoCell2</span><span class="p">,</span>
+                <span class="n">restingRatio1</span><span class="p">,</span>
+                <span class="n">restingRatio2</span><span class="p">):</span>
+    <span class="s">'''
+    [Note]: 11/06/2020 by Ben 
+    In this function, having all resting cells or activated cells will not cause any error.
+    
+    [Parameter Description]
+    PDBfileName:    pdb file name
+    NoCell1:        a total number of cells in the 1st half of box 
+    NoCell2:        a total number of cells in the 2nd half of box 
+    restingRatio1:  the proportion of resting cells in the 1st half of box 
+    restingRatio2:  the proportion of resting cells in the 2nd half of box 
+
+    '''</span>    
+    <span class="c1"># --- Writing pdb file initiated ---
+</span>    <span class="n">structure</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">PDBfileName</span><span class="o">+</span><span class="s">".pdb"</span><span class="p">,</span><span class="s">"w"</span><span class="p">)</span> 
+    <span class="n">structure</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"MODEL     1 </span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+
+    <span class="s">'''
+    [------First half of box-------]
+    '''</span>
+    <span class="n">xo1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NoCell1</span><span class="p">)</span>
+    <span class="n">yo1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NoCell1</span><span class="p">)</span>
+    <span class="c1"># although the simulation is in 2D box, it is required to register this in PDB file
+</span>    <span class="n">zo1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NoCell1</span><span class="p">)</span>    
+    <span class="c1"># determining a total number of resting cells from the overall population
+</span>    <span class="c1">## the rest of cells are activated cells 
+</span>    <span class="n">restingCell1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">NoCell1</span><span class="o">*</span><span class="n">restingRatio1</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="n">NoCell1</span><span class="p">):</span>
+        <span class="n">xo1</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+        <span class="n">yo1</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+        <span class="n">zo1</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="n">NoCell1</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span><span class="n">xo1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s">'.3f'</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span><span class="n">yo1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s">'.3f'</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span><span class="n">zo1</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s">'.3f'</span><span class="p">)</span>
+        <span class="c1"># Registering resting and activated cells with name ID 
+</span>        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">restingCell1</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s">'RM'</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">restingCell1</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s">'AM'</span>
+            
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">:</span>
+            <span class="n">structure</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"ATOM      "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">"  "</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">"     "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">"       "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">+</span><span class="s">"  1.00  0.00 </span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">9</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">99</span><span class="p">:</span>
+            <span class="n">structure</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"ATOM     "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">"  "</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">"    "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">"       "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">+</span><span class="s">"  1.00  0.00 </span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">99</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">999</span><span class="p">:</span>
+            <span class="n">structure</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"ATOM    "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">"  "</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">"       "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">+</span><span class="s">"  1.00  0.00 </span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">999</span><span class="p">:</span>
+            <span class="n">structure</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"ATOM   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">"  "</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">"  "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">"       "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">+</span><span class="s">"  1.00  0.00 </span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+
+
+    <span class="s">'''
+    [------Second half of box-------]
+    '''</span>        
+    <span class="n">xo2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NoCell2</span><span class="p">)</span>
+    <span class="n">yo2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NoCell2</span><span class="p">)</span>
+    <span class="c1"># although the simulation is in 2D box, it is required to register this in PDB file
+</span>    <span class="n">zo2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NoCell2</span><span class="p">)</span>
+    <span class="c1"># determining a total number of resting cells from the overall population
+</span>    <span class="c1">## the rest of cells are activated cells 
+</span>    <span class="n">restingCell2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">NoCell2</span><span class="o">*</span><span class="n">restingRatio2</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="n">NoCell2</span><span class="p">):</span>
+        <span class="n">xo2</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+        <span class="n">yo2</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+        <span class="n">zo2</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+        
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="n">NoCell2</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span><span class="n">xo2</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s">'.3f'</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span><span class="n">yo2</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s">'.3f'</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="nb">format</span><span class="p">(</span><span class="n">zo2</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="s">'.3f'</span><span class="p">)</span>
+        <span class="c1"># Registering resting and activated cells with name ID 
+</span>        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">restingCell2</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s">'RM'</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="n">restingCell2</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s">'AM'</span>
+        
+        <span class="n">num</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">NoCell1</span>
+        
+        <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">9</span><span class="p">:</span>
+            <span class="n">structure</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"ATOM      "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">"  "</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">"     "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">"       "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">+</span><span class="s">"  1.00  0.00 </span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">num</span> <span class="o">&gt;=</span> <span class="mi">9</span> <span class="ow">and</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">99</span><span class="p">:</span>
+            <span class="n">structure</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"ATOM     "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">"  "</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">"    "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">"       "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">+</span><span class="s">"  1.00  0.00 </span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">num</span> <span class="o">&gt;=</span> <span class="mi">99</span> <span class="ow">and</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">999</span><span class="p">:</span>
+            <span class="n">structure</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"ATOM    "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">"  "</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">"       "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">+</span><span class="s">"  1.00  0.00 </span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">num</span> <span class="o">&gt;=</span> <span class="mi">999</span><span class="p">:</span>
+            <span class="n">structure</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"ATOM   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">"  "</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s">"  "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">"       "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="s">"   "</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">+</span><span class="s">"  1.00  0.00 </span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+        
+    <span class="n">structure</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">"ENDMDL"</span><span class="p">)</span>
+    <span class="n">structure</span><span class="p">.</span><span class="n">close</span>
+                   
+    <span class="k">return</span> 
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#######################################################################################
+###                           Cell/Particle Distributor                             ###
+#######################################################################################
+</span><span class="k">def</span> <span class="nf">genCellCoord3D</span><span class="p">(</span><span class="n">NoCell1</span><span class="p">,</span>
+                   <span class="n">NoCell2</span><span class="p">,</span>
+                   <span class="n">Rlim</span><span class="p">,</span>
+                   <span class="n">CentoR</span><span class="p">,</span>
+                   <span class="n">lowx</span><span class="p">,</span>
+                   <span class="n">highx</span><span class="p">,</span>
+                   <span class="n">lowy</span><span class="p">,</span>
+                   <span class="n">highy</span><span class="p">,</span>
+                   <span class="n">restingRatio1</span><span class="p">,</span>
+                   <span class="n">restingRatio2</span><span class="p">,</span>
+                   <span class="n">restMig</span><span class="p">,</span>
+                   <span class="n">actMig</span><span class="p">,</span>
+                   <span class="n">restAuto</span><span class="p">,</span>
+                   <span class="n">actAuto</span><span class="p">):</span>
+    <span class="s">'''
+    [Parameter Description]
+    NoCell1:        a total number of cells in the 1st half of box 
+    NoCell2:        a total number of cells in the 2nd half of box 
+    restingRatio1:  the proportion of resting cells in the 1st half of box 
+    restingRatio2:  the proportion of resting cells in the 2nd half of box 
+    Rlim:           the minimum distance among cells 
+    CentoR:         this will determine the size of 1st section of simulation box in x axis 
+    lowx:           low end of simulation box in x axis
+    highx:          high end of simulation box in x axis 
+    lowy:           low end of simulation box in y axis
+    highy:          high end of simulation box in y axis 
+    restMig:        the degree of migratory response of resting cells 
+    actMig:         the degree of migratory response of activated cells 
+    restAuto:       the degree of autocrinic release of resting cells 
+    actAuto:        the degree of autocrinic release of activated cells 
+    '''</span>
+    <span class="n">coord</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">marker</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">total_num_cells</span> <span class="o">=</span> <span class="n">NoCell1</span> <span class="o">+</span> <span class="n">NoCell2</span>
+    <span class="n">autocrine_factor</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">total_num_cells</span><span class="p">)</span>
+    <span class="n">migration_factor</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">total_num_cells</span><span class="p">)</span>
+    <span class="n">coordtoYaml</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">minDist</span> <span class="o">=</span> <span class="n">Rlim</span>
+    <span class="n">bumper</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># this will prevent the placement beyond the actual dimension you assinged
+</span>    
+    <span class="c1">## First box ##
+</span>    <span class="c1">### Configuring dimension where particles are placed
+</span>    <span class="c1"># --- X axis ---
+</span>    <span class="k">if</span> <span class="n">CentoR</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">CentoR</span> <span class="o">&gt;</span> <span class="n">highx</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"The length of 1st half box should be smaller than the total length of simulation box"</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"[CentoR &lt; highx], Recommended to be less than half of a total length of simulation box"</span><span class="p">)</span> 
+            <span class="n">sys</span><span class="p">.</span><span class="nb">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">CentoR</span> <span class="o">&lt;</span> <span class="n">highx</span> <span class="ow">and</span> <span class="n">CentoR</span> <span class="o">&gt;</span> <span class="n">bumper</span><span class="p">:</span>
+            <span class="n">maxX1</span> <span class="o">=</span> <span class="n">CentoR</span> <span class="o">-</span> <span class="n">bumper</span> <span class="c1"># in angstrom
+</span>        <span class="k">elif</span> <span class="n">CentoR</span> <span class="o">&lt;</span> <span class="n">bumper</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"CentoR must be bigger than the bumper size (=10)"</span><span class="p">)</span>
+            <span class="n">sys</span><span class="p">.</span><span class="nb">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">CentoR</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">CentoR</span> <span class="o">=</span> <span class="n">highx</span><span class="o">/</span><span class="mi">3</span>
+        <span class="n">maxX1</span> <span class="o">=</span> <span class="n">CentoR</span><span class="o">-</span><span class="n">bumper</span>
+        
+        
+    <span class="n">minX1</span> <span class="o">=</span> <span class="n">lowx</span> <span class="o">+</span> <span class="n">bumper</span> <span class="c1"># in angstrom
+</span>    <span class="c1"># --- Y axis ---
+</span>    <span class="n">maxY1</span> <span class="o">=</span> <span class="n">highy</span> <span class="o">-</span> <span class="n">bumper</span> 
+    <span class="n">minY1</span> <span class="o">=</span> <span class="n">lowy</span> <span class="o">+</span> <span class="n">bumper</span> 
+
+    <span class="n">numP1</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">maxP1</span> <span class="o">=</span> <span class="n">NoCell1</span>
+    <span class="n">maxRestingP1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">NoCell1</span><span class="o">*</span><span class="n">restingRatio1</span><span class="p">)</span>
+    <span class="n">maxIter1</span> <span class="o">=</span> <span class="mi">20000</span><span class="o">*</span><span class="n">maxP1</span>
+    <span class="n">loopcounter1</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">xo</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NoCell1</span><span class="p">)</span>
+    <span class="n">yo</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NoCell1</span><span class="p">)</span>
+    
+    <span class="c1">#print(maxP1)
+</span>    <span class="k">while</span> <span class="n">numP1</span> <span class="o">&lt;</span> <span class="n">maxP1</span> <span class="ow">and</span> <span class="n">loopcounter1</span> <span class="o">&lt;</span> <span class="n">maxIter1</span><span class="p">:</span>
+        <span class="n">xpossible</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="n">minX1</span><span class="p">,</span><span class="n">maxX1</span><span class="p">)</span>
+        <span class="n">ypossible</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="n">minY1</span><span class="p">,</span><span class="n">maxY1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">numP1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">xo</span><span class="p">[</span><span class="n">numP1</span><span class="p">]</span> <span class="o">=</span> <span class="n">xpossible</span>
+            <span class="n">yo</span><span class="p">[</span><span class="n">numP1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ypossible</span>
+            <span class="c1"># -- marking state of cell -- #
+</span>            <span class="n">marker</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'resting'</span><span class="p">)</span>
+            <span class="n">migration_factor</span><span class="p">[</span><span class="n">numP1</span><span class="p">]</span> <span class="o">=</span> <span class="n">restMig</span>
+            <span class="n">autocrine_factor</span><span class="p">[</span><span class="n">numP1</span><span class="p">]</span> <span class="o">=</span> <span class="n">restAuto</span>
+            <span class="c1"># --------------------------- #
+</span>            <span class="n">coord</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">xpossible</span><span class="p">,</span><span class="n">ypossible</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">coordtoYaml</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">numP1</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span><span class="n">xpossible</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="n">ypossible</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">numP1</span> <span class="o">=</span> <span class="n">numP1</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">continue</span>
+
+        <span class="n">distance1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">xo</span><span class="o">-</span><span class="n">xpossible</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">yo</span><span class="o">-</span><span class="n">ypossible</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="n">distance1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">minDist</span><span class="p">:</span>
+            <span class="n">xo</span><span class="p">[</span><span class="n">numP1</span><span class="p">]</span> <span class="o">=</span> <span class="n">xpossible</span>
+            <span class="n">yo</span><span class="p">[</span><span class="n">numP1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ypossible</span>
+            <span class="n">coord</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">xpossible</span><span class="p">,</span><span class="n">ypossible</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">coordtoYaml</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">numP1</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span><span class="n">xpossible</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="n">ypossible</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1"># -- marking state of cell -- #
+</span>            <span class="k">if</span> <span class="n">numP1</span> <span class="o">&lt;=</span> <span class="n">maxRestingP1</span><span class="p">:</span>
+                <span class="n">marker</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'resting'</span><span class="p">)</span>
+                <span class="n">migration_factor</span><span class="p">[</span><span class="n">numP1</span><span class="p">]</span> <span class="o">=</span> <span class="n">restMig</span>
+                <span class="n">autocrine_factor</span><span class="p">[</span><span class="n">numP1</span><span class="p">]</span> <span class="o">=</span> <span class="n">restAuto</span>
+            <span class="k">elif</span> <span class="n">numP1</span> <span class="o">&gt;</span> <span class="n">maxRestingP1</span><span class="p">:</span>
+                <span class="n">marker</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'activated'</span><span class="p">)</span>
+                <span class="n">migration_factor</span><span class="p">[</span><span class="n">numP1</span><span class="p">]</span> <span class="o">=</span> <span class="n">actMig</span>
+                <span class="n">autocrine_factor</span><span class="p">[</span><span class="n">numP1</span><span class="p">]</span> <span class="o">=</span> <span class="n">actAuto</span>
+            <span class="c1"># --------------------------- #
+</span>            <span class="n">numP1</span> <span class="o">=</span> <span class="n">numP1</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">loopcounter1</span> <span class="o">=</span> <span class="n">loopcounter1</span> <span class="o">+</span> <span class="mi">1</span>
+    
+    <span class="c1">#print(numP1)
+</span>    <span class="c1">## Second box ##
+</span>    <span class="c1">### Configuring dimension where particles are placed
+</span>    <span class="c1"># --- X axis ---
+</span>    <span class="n">maxX2</span> <span class="o">=</span> <span class="n">CentoR</span><span class="o">*</span><span class="mi">2</span> <span class="o">-</span> <span class="n">bumper</span> <span class="c1"># in angstrom 
+</span>    <span class="n">minX2</span> <span class="o">=</span> <span class="n">CentoR</span> <span class="o">+</span> <span class="n">bumper</span> <span class="c1"># in angstrom
+</span>    <span class="c1"># --- Y axis ---
+</span>    <span class="n">maxY2</span> <span class="o">=</span> <span class="n">highy</span> <span class="o">-</span> <span class="n">bumper</span> 
+    <span class="n">minY2</span> <span class="o">=</span> <span class="n">lowy</span> <span class="o">+</span> <span class="n">bumper</span> 
+
+    <span class="n">numP2</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">maxP2</span> <span class="o">=</span> <span class="n">NoCell2</span>
+    <span class="n">maxRestingP2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">NoCell2</span><span class="o">*</span><span class="n">restingRatio2</span><span class="p">)</span>
+    <span class="n">maxIter2</span> <span class="o">=</span> <span class="mi">20000</span><span class="o">*</span><span class="n">NoCell2</span>
+    <span class="n">loopcounter2</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">xo2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NoCell2</span><span class="p">)</span>
+    <span class="n">yo2</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">NoCell2</span><span class="p">)</span>
+    <span class="c1">#print(maxP2)    
+</span>    <span class="k">while</span> <span class="n">numP2</span> <span class="o">&lt;</span> <span class="n">maxP2</span> <span class="ow">and</span> <span class="n">loopcounter2</span> <span class="o">&lt;</span> <span class="n">maxIter2</span><span class="p">:</span>
+        <span class="n">xpossible</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="n">minX2</span><span class="p">,</span><span class="n">maxX2</span><span class="p">)</span>
+        <span class="n">ypossible</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="n">minY2</span><span class="p">,</span><span class="n">maxY2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">numP2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">xo2</span><span class="p">[</span><span class="n">numP2</span><span class="p">]</span> <span class="o">=</span> <span class="n">xpossible</span>
+            <span class="n">yo2</span><span class="p">[</span><span class="n">numP2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ypossible</span>
+            <span class="c1"># -- marking state of cell -- #
+</span>            <span class="n">marker</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'resting'</span><span class="p">)</span>
+            <span class="n">migration_factor</span><span class="p">[</span><span class="n">numP1</span><span class="o">+</span><span class="n">numP2</span><span class="p">]</span> <span class="o">=</span> <span class="n">restMig</span>
+            <span class="n">autocrine_factor</span><span class="p">[</span><span class="n">numP1</span><span class="o">+</span><span class="n">numP2</span><span class="p">]</span> <span class="o">=</span> <span class="n">restAuto</span>
+            <span class="c1"># --------------------------- #
+</span>            <span class="n">coord</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">xpossible</span><span class="p">,</span><span class="n">ypossible</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">coordtoYaml</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">numP1</span><span class="o">+</span><span class="n">numP2</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span><span class="n">xpossible</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="n">ypossible</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">numP2</span> <span class="o">=</span> <span class="n">numP2</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">continue</span>
+
+        <span class="n">distance1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">xo2</span><span class="o">-</span><span class="n">xpossible</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">yo2</span><span class="o">-</span><span class="n">ypossible</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">min</span><span class="p">(</span><span class="n">distance1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">minDist</span><span class="p">:</span>
+            <span class="n">xo2</span><span class="p">[</span><span class="n">numP2</span><span class="p">]</span> <span class="o">=</span> <span class="n">xpossible</span>
+            <span class="n">yo2</span><span class="p">[</span><span class="n">numP2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ypossible</span>
+            <span class="n">coord</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">xpossible</span><span class="p">,</span><span class="n">ypossible</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">coordtoYaml</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">numP1</span><span class="o">+</span><span class="n">numP2</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span><span class="n">xpossible</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="n">ypossible</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1"># -- marking state of cell -- #
+</span>            <span class="k">if</span> <span class="n">numP2</span> <span class="o">&lt;=</span> <span class="n">maxRestingP2</span><span class="p">:</span>
+                <span class="n">marker</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'resting'</span><span class="p">)</span>
+                <span class="n">migration_factor</span><span class="p">[</span><span class="n">numP1</span><span class="o">+</span><span class="n">numP2</span><span class="p">]</span> <span class="o">=</span> <span class="n">restMig</span>
+                <span class="n">autocrine_factor</span><span class="p">[</span><span class="n">numP1</span><span class="o">+</span><span class="n">numP2</span><span class="p">]</span> <span class="o">=</span> <span class="n">restAuto</span>
+            <span class="k">elif</span> <span class="n">numP2</span> <span class="o">&gt;</span> <span class="n">maxRestingP2</span><span class="p">:</span>
+                <span class="n">marker</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'activated'</span><span class="p">)</span>
+                <span class="n">migration_factor</span><span class="p">[</span><span class="n">numP1</span><span class="o">+</span><span class="n">numP2</span><span class="p">]</span> <span class="o">=</span> <span class="n">actMig</span>
+                <span class="n">autocrine_factor</span><span class="p">[</span><span class="n">numP1</span><span class="o">+</span><span class="n">numP2</span><span class="p">]</span> <span class="o">=</span> <span class="n">actAuto</span>
+            <span class="c1"># --------------------------- #
+</span>            <span class="n">numP2</span> <span class="o">=</span> <span class="n">numP2</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">loopcounter2</span> <span class="o">=</span> <span class="n">loopcounter2</span> <span class="o">+</span> <span class="mi">1</span>
+    
+    <span class="c1">#print(numP2)
+</span>    
+    <span class="c1">#print(np.shape(coord))
+</span>    <span class="c1">#coord = coord/10
+</span>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="n">NoCell1</span><span class="o">+</span><span class="n">NoCell2</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">coord</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">coord</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="mi">10</span> <span class="c1">## &lt;--- angstrom to nano meter conversion
+</span>    
+    <span class="c1">## Store coordinates in yaml file 
+</span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'dummy.yml'</span><span class="p">,</span><span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+          <span class="n">document</span> <span class="o">=</span> <span class="n">yaml</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">coord</span><span class="p">,</span><span class="nb">file</span><span class="p">)</span>
+                           
+    <span class="k">return</span> <span class="n">coord</span><span class="p">,</span> <span class="n">marker</span><span class="p">,</span> <span class="n">migration_factor</span><span class="p">,</span> <span class="n">autocrine_factor</span> 
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">###############################################################################################
+###                        Written by Yehven and implemented by Ben                         ###
+###############################################################################################
+</span>
+<span class="k">def</span> <span class="nf">calcForce</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span>
+              <span class="n">numberOfCells</span><span class="p">,</span>
+              <span class="n">Origin</span><span class="p">,</span>
+              <span class="n">SourceOfOrigin</span><span class="p">,</span>
+              <span class="n">oriConc</span><span class="p">,</span>
+              <span class="n">cellConc</span><span class="p">,</span>
+              <span class="n">Diff</span><span class="p">,</span>
+              <span class="n">t</span><span class="p">,</span>
+              <span class="n">kd</span><span class="p">,</span>
+              <span class="n">highBC</span><span class="p">,</span>
+              <span class="n">DisplacementScaleByConc</span><span class="p">,</span>
+              <span class="n">searchingRange</span><span class="p">,</span>
+              <span class="n">marker</span><span class="p">,</span>
+              <span class="n">auto_factor</span><span class="p">,</span>
+              <span class="n">state</span><span class="p">,</span>
+              <span class="n">ConcByCell</span><span class="p">):</span>
+    <span class="s">'''
+    [Parameter Description]
+    positions:               position of cells from pdb file 
+    numberOfCells:           total number of cells (num of cells in 1st half + num of cells in 2nd half)
+    Origin:                  the origin of chemoattractant source 
+    SourceOfOrigin:          None = One end of simulation box in x axis, Center = the center of simulation box
+    oriConc:                 the max concentration released from the source of chemoattractant
+    cellConc:                the max concentration released by cells (determining the degree of intercellular communication)
+    Diff:                    the diffusion rate of chemoattractant 
+    t:                       time 
+    kd:                      constant associated with Hills coefficient for autocrinic release
+    highBC:                  [max X, max Y, max Z]
+    DisplacementScaleByConc: Displacement Scale 
+    searchingRange:          searching range around the cell 
+    marker:                  a list of marker for resting and activated cells 
+    auto_factor:             a list of autocrinic factors based on the state of cells 
+    state:                   the characteristics of diffusion of chemoattractant: steady, error, or linear  
+    ConcByCell:              the concentration accumulated by the attractant released from each individual cell
+    '''</span>
+    
+    <span class="c1"># Do some magic here that will return substrate field-related force acting on each particle
+</span>    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">dummy_coord</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="n">numberOfCells</span><span class="p">])</span>
+
+    <span class="c1">#ConcByCell                = np.zeros(numberOfCells) + 1e-14
+</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">positions</span><span class="p">):</span>           
+        <span class="n">dummy_coord</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="n">value_in_unit</span><span class="p">(</span><span class="n">nanometers</span><span class="p">)</span>
+        <span class="n">dummy_coord</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">].</span><span class="n">value_in_unit</span><span class="p">(</span><span class="n">nanometers</span><span class="p">)</span>
+        <span class="n">dummy_coord</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">].</span><span class="n">value_in_unit</span><span class="p">(</span><span class="n">nanometers</span><span class="p">)</span><span class="o">*</span><span class="mi">0</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+    <span class="n">recordedPositions</span>         <span class="o">=</span> <span class="n">dummy_coord</span>
+
+    <span class="n">DistCelltoOrigin</span>          <span class="o">=</span> <span class="n">conc</span><span class="p">.</span><span class="n">DistCelltoOrigin</span><span class="p">(</span><span class="n">recordedPositions</span><span class="p">,</span>
+                                                      <span class="n">Origin</span><span class="p">,</span>
+                                                      <span class="n">SourceOfOrigin</span><span class="p">,</span>
+                                                      <span class="n">state</span><span class="p">)</span>
+
+    <span class="n">DistCelltoCell</span>            <span class="o">=</span> <span class="n">conc</span><span class="p">.</span><span class="n">DistCelltoCell</span><span class="p">(</span><span class="n">recordedPositions</span><span class="p">)</span>
+
+    <span class="n">ConcByOrigin</span>              <span class="o">=</span> <span class="n">conc</span><span class="p">.</span><span class="n">ConcByOrigin</span><span class="p">(</span><span class="n">DistCelltoOrigin</span><span class="p">,</span>
+                                                  <span class="n">t</span><span class="p">,</span>
+                                                  <span class="n">Diff</span><span class="p">,</span>
+                                                  <span class="n">oriConc</span><span class="p">,</span>
+                                                  <span class="n">state</span><span class="p">,</span>
+                                                  <span class="n">Origin</span><span class="p">)</span>
+
+    <span class="n">ConcbyCell</span><span class="p">,</span> <span class="n">HC</span>            <span class="o">=</span> <span class="n">conc</span><span class="p">.</span><span class="n">ConcByCell</span><span class="p">(</span><span class="n">ConcByOrigin</span><span class="p">,</span>
+                                                <span class="n">ConcByCell</span><span class="p">,</span>
+                                                <span class="n">DistCelltoCell</span><span class="p">,</span>
+                                                <span class="n">t</span><span class="p">,</span>
+                                                <span class="n">Diff</span><span class="p">,</span>
+                                                <span class="n">kd</span><span class="p">,</span>
+                                                <span class="n">auto_factor</span><span class="p">,</span>
+                                                <span class="n">cellConc</span><span class="p">)</span>
+
+    <span class="n">fvX</span><span class="p">,</span> <span class="n">fvY</span><span class="p">,</span> <span class="n">fvZ</span>             <span class="o">=</span> <span class="n">conc</span><span class="p">.</span><span class="n">forceGen</span><span class="p">(</span><span class="n">ConcbyCell</span><span class="p">,</span>
+                                              <span class="n">Origin</span><span class="p">,</span>
+                                              <span class="n">SourceOfOrigin</span><span class="p">,</span>
+                                              <span class="n">recordedPositions</span><span class="p">,</span>
+                                              <span class="n">t</span><span class="p">,</span>
+                                              <span class="n">Diff</span><span class="p">,</span>
+                                              <span class="n">HC</span><span class="p">,</span>
+                                              <span class="n">searchingRange</span><span class="p">,</span>
+                                              <span class="n">highBC</span><span class="p">,</span>
+                                              <span class="n">DisplacementScaleByConc</span><span class="p">,</span>
+                                              <span class="n">cellConc</span><span class="p">,</span>
+                                              <span class="n">oriConc</span><span class="p">,</span>
+                                              <span class="n">state</span><span class="p">)</span>    
+       
+    <span class="k">return</span> <span class="n">fvX</span><span class="p">,</span> <span class="n">fvY</span><span class="p">,</span> <span class="n">fvZ</span><span class="p">,</span> <span class="n">ConcbyCell</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">###############################################################################################
+###                        Written by Ben and implemented by Ben                            ###
+###############################################################################################
+</span>
+<span class="k">def</span> <span class="nf">stateFunc</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+    <span class="c1">## Rate of state transition 
+</span>    <span class="n">kf</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="n">kb</span> <span class="o">=</span> <span class="mf">0.01</span>
+    
+    <span class="n">dydt</span> <span class="o">=</span> <span class="n">kf</span><span class="o">*</span><span class="n">c</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">kb</span><span class="o">*</span><span class="n">y</span>
+    
+    <span class="k">return</span> <span class="n">dydt</span>
+
+<span class="k">def</span> <span class="nf">calcStateVariable</span><span class="p">(</span><span class="n">numberOfCells</span><span class="p">,</span>
+                      <span class="n">repeat</span><span class="p">,</span>
+                      <span class="n">timeb</span><span class="p">,</span>
+                      <span class="n">time</span><span class="p">,</span>
+                      <span class="n">ConcbyCell</span><span class="p">,</span>
+                      <span class="n">stateVariable</span><span class="p">):</span>
+    
+    <span class="n">t</span> <span class="o">=</span> <span class="n">scipy</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">timeb</span><span class="p">,</span><span class="n">time</span><span class="p">,</span><span class="n">repeat</span><span class="p">)</span>
+    <span class="n">newstateVar</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">stateDepFactor</span> <span class="o">=</span> <span class="p">[]</span>
+       
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="n">numberOfCells</span><span class="p">):</span>
+        
+        <span class="n">stateVar</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">stateFunc</span><span class="p">,</span><span class="n">stateVariable</span><span class="p">[</span><span class="n">n</span><span class="p">],</span><span class="n">t</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">ConcbyCell</span><span class="p">[</span><span class="n">n</span><span class="p">],))</span>
+        <span class="n">dummy1</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nb">float</span><span class="p">(</span><span class="n">stateVar</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">newstateVar</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">dummy1</span><span class="p">)</span>
+        <span class="n">dummy2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">dummy1</span><span class="o">/</span><span class="mf">0.50</span><span class="p">)</span>
+        <span class="n">stateDepFactor</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">dummy2</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">newstateVar</span><span class="p">,</span> <span class="n">stateDepFactor</span>
+
+<span class="k">def</span> <span class="nf">calcForceModified</span><span class="p">(</span><span class="n">numberOfCells</span><span class="p">,</span>
+                      <span class="n">fvX</span><span class="p">,</span>
+                      <span class="n">fvY</span><span class="p">,</span>
+                      <span class="n">fvZ</span><span class="p">,</span>
+                      <span class="n">stateDepFactor</span><span class="p">,</span>
+                      <span class="n">mig_factor</span><span class="p">):</span>
+    <span class="c1"># This is where I can make an adjustment for resting and activated cells
+</span>    <span class="n">forces</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">numberOfCells</span><span class="p">):</span>
+    
+        <span class="n">force_on_particle</span> <span class="o">=</span> <span class="p">[</span><span class="n">fvX</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">mig_factor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">stateDepFactor</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> 
+                             <span class="n">fvY</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">mig_factor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">stateDepFactor</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> 
+                             <span class="n">fvZ</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">mig_factor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">stateDepFactor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">0</span><span class="p">]</span>
+        
+        <span class="n">forces</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">force_on_particle</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">forces</span>
+</code></pre></div></div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">###########################################################################
+###                           Test RUN - OpenMM                         ###
+###########################################################################
+</span><span class="k">def</span> <span class="nf">testRunner</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="n">pdb</span> <span class="o">=</span> <span class="n">PDBFile</span><span class="p">(</span><span class="n">filename</span><span class="o">+</span><span class="s">'.pdb'</span><span class="p">)</span>
+    <span class="n">forcefield</span> <span class="o">=</span> <span class="n">ForceField</span><span class="p">(</span><span class="s">'/home/bending456/Ben-Code/Modeling-Codes/Codes/OpenMM_Tutorial/Particle_in_box/Particle_Ben.xml'</span><span class="p">)</span>
+    <span class="n">system</span> <span class="o">=</span> <span class="n">forcefield</span><span class="p">.</span><span class="n">createSystem</span><span class="p">(</span><span class="n">pdb</span><span class="p">.</span><span class="n">topology</span><span class="p">,</span> <span class="n">nonbondedMethod</span><span class="o">=</span><span class="n">PME</span><span class="p">,</span> <span class="n">nonbondedCutoff</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="n">nanometer</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">HBonds</span><span class="p">)</span>
+    <span class="n">integrator</span> <span class="o">=</span> <span class="n">LangevinIntegrator</span><span class="p">(</span><span class="mi">300</span><span class="o">*</span><span class="n">kelvin</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">picosecond</span><span class="p">,</span> <span class="mf">0.002</span><span class="o">*</span><span class="n">picoseconds</span><span class="p">)</span>
+    <span class="n">simulation</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span><span class="n">pdb</span><span class="p">.</span><span class="n">topology</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">integrator</span><span class="p">)</span>
+    <span class="n">simulation</span><span class="p">.</span><span class="n">context</span><span class="p">.</span><span class="n">setPositions</span><span class="p">(</span><span class="n">pdb</span><span class="p">.</span><span class="n">positions</span><span class="p">)</span>
+    <span class="n">simulation</span><span class="p">.</span><span class="n">minimizeEnergy</span><span class="p">()</span>
+    <span class="n">simulation</span><span class="p">.</span><span class="n">reporters</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">PDBReporter</span><span class="p">(</span><span class="s">'output.pdb'</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">simulation</span><span class="p">.</span><span class="n">reporters</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">StateDataReporter</span><span class="p">(</span><span class="n">stdout</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">potentialEnergy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+    <span class="n">simulation</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    
+    <span class="k">return</span>
+
+</code></pre></div></div> </div> </div> <div class="search-overlay"></div> </div> </body> </html>
