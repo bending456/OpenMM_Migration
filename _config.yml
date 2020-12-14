@@ -4,6 +4,8 @@ remote_theme: pmarsceill/just-the-docs
 aux_links:
   "Colaboratory Link":
   - "https://colab.research.google.com/notebooks/intro.ipynb"
+  "Contact Ben":
+  - "mailto:bchun@luc.edu"
 
-title: "Macrophage - Pathway Analysis in Python"
+title: "Cell Migration - MD (OpenMM) based simulation"
 theme: jekyll-theme-cayman

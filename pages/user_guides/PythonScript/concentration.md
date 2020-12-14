@@ -28,6 +28,9 @@ def func(r,t,D):
 ############################
 ```
 
+### Calculating distance from the source of chemoattractant source
+- There are two major types of calculations based on the diffusion state of substances: steady and non-steady.  
+-- In the case of a non-steady state, in which the erf is applied, the source of substances is assigned at a distanced location from the cell population or the simulation box center. Since the concentration of substances coming from this source is a function of distance, it requires the distance from the source to the individual cell.
 ```python
 #############################################################################################################################
 ### Distance of Cell from the location of Damaged Cell
@@ -63,6 +66,8 @@ def DistCelltoOrigin(CellCoord,
     return CelltoOrigin_r
 ```
 
+### Calculating distance from cell to cell 
+- The gradient of substances in this calculation is based on *the error function*. Its source releases a certain amount, but the cells contribute the same chemical to the gradient formation (ex. ATP-mediated ATP release.)
 ```python
 ####################################################################################################################
 ### Distance among cells 
@@ -83,6 +88,12 @@ def DistCelltoCell(CellCoord):
     
     return CelltoCell_r # this is in dictionary form but it doesn't have to be 
 ```
+
+### Concentration of substance as a function of cell position with respect to the source of substance. 
+- There are three states: linear, steady, and error. 
+    - **Linear**: a simple linear function (y=ax+b) governs the concentration gradient's estimation from the source of substances to the cell location.
+    - **Steady**: the media is fully saturated with substances. 
+    - **Error**: an error function is used to estimate the concentration gradient from the source of substances to the cell location. 
 
 ```python
 #######################################################################
