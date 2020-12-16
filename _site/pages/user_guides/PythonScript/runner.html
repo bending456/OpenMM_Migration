@@ -188,8 +188,8 @@ This simulation is designed for 2D space but it can be also implemented in 3D
 </span>    
     
     <span class="c1">## Set the initial stateVariable: Starting from 0 for now. 
-</span>    <span class="n">odeiter</span> <span class="o">=</span> <span class="mi">5</span>
-    <span class="n">stateVariable</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">num_particles</span><span class="p">])</span>
+</span>    <span class="c1">#odeiter = 5
+</span>    <span class="n">stateVariable</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">([</span><span class="n">num_particles</span><span class="p">])</span>
 
     <span class="c1"># storing initial position 
 </span>    <span class="n">rest_cell_no</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">numOfCells1</span><span class="o">*</span><span class="n">restingRatio1</span><span class="p">)</span><span class="o">+</span><span class="nb">int</span><span class="p">(</span><span class="n">numOfCells2</span><span class="o">*</span><span class="n">restingRatio2</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span>
@@ -217,13 +217,15 @@ This simulation is designed for 2D space but it can be also implemented in 3D
         <span class="n">cell_cnt</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">print</span><span class="p">(</span><span class="s">"|------ calibration initiated -----|"</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">num_iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10000</span><span class="p">):</span> <span class="c1">### What is this? 
+    <span class="k">for</span> <span class="n">num_iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2000</span><span class="p">):</span> <span class="c1">### What is this? 
 </span>        <span class="n">positions</span> <span class="o">=</span> <span class="n">simulation</span><span class="p">.</span><span class="n">context</span><span class="p">.</span><span class="n">getState</span><span class="p">(</span><span class="n">getPositions</span><span class="o">=</span><span class="bp">True</span><span class="p">).</span><span class="n">getPositions</span><span class="p">()</span>
         <span class="n">simulation</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="n">stepFreq</span><span class="p">)</span>
         <span class="n">state</span> <span class="o">=</span> <span class="n">simulation</span><span class="p">.</span><span class="n">context</span><span class="p">.</span><span class="n">getState</span><span class="p">(</span><span class="n">getEnergy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">getForces</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="n">time</span> <span class="o">+=</span> <span class="n">stepFreq</span>
     
     <span class="k">print</span><span class="p">(</span><span class="s">"|----- simulation initiated -----|"</span><span class="p">)</span>
+    
+    <span class="n">time_state</span> <span class="o">=</span> <span class="mf">1e-14</span>
     <span class="k">for</span> <span class="n">num_iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Repeat</span><span class="p">):</span> <span class="c1">### What is this? 
 </span>        <span class="n">positions</span> <span class="o">=</span> <span class="n">simulation</span><span class="p">.</span><span class="n">context</span><span class="p">.</span><span class="n">getState</span><span class="p">(</span><span class="n">getPositions</span><span class="o">=</span><span class="bp">True</span><span class="p">).</span><span class="n">getPositions</span><span class="p">()</span>
         <span class="c1"># forces_vec will contain external forces that we want to feed into OpenMM.
@@ -241,7 +243,7 @@ This simulation is designed for 2D space but it can be also implemented in 3D
                                                    <span class="n">oriConc</span><span class="p">,</span>
                                                    <span class="n">cellConc</span><span class="p">,</span>
                                                    <span class="n">Diff</span><span class="p">,</span>
-                                                   <span class="n">time</span><span class="p">,</span>
+                                                   <span class="n">time_state</span><span class="p">,</span>
                                                    <span class="n">kd</span><span class="p">,</span>
                                                    <span class="n">highBC</span><span class="p">,</span>
                                                    <span class="n">DispScale</span><span class="p">,</span>
@@ -251,18 +253,18 @@ This simulation is designed for 2D space but it can be also implemented in 3D
                                                    <span class="n">DiffState</span><span class="p">,</span>
                                                    <span class="n">ConcByCell</span><span class="p">)</span>
         
-        <span class="k">if</span> <span class="n">num_iter</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">timeb</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">timeb</span> <span class="o">=</span> <span class="n">time</span> <span class="o">-</span> <span class="n">stepFreq</span>
-        
-        <span class="n">stateVariable</span><span class="p">,</span> <span class="n">stateDepFactor</span> <span class="o">=</span> <span class="n">calc</span><span class="p">.</span><span class="n">calcStateVariable</span><span class="p">(</span><span class="n">num_particles</span><span class="p">,</span> 
-                                                               <span class="n">odeiter</span><span class="p">,</span> 
-                                                               <span class="n">timeb</span><span class="p">,</span> 
-                                                               <span class="n">time</span><span class="p">,</span> 
+        <span class="c1">#print(ConcbyCell[1])
+</span>        <span class="n">stateVariable</span><span class="p">,</span> <span class="n">stateDepFactor</span> <span class="o">=</span> <span class="n">calc</span><span class="p">.</span><span class="n">calcStateVariable</span><span class="p">(</span><span class="n">num_particles</span><span class="p">,</span> 
+                                                               <span class="n">time_state</span><span class="p">,</span> 
                                                                <span class="n">ConcbyCell</span><span class="p">,</span> 
                                                                <span class="n">stateVariable</span><span class="p">)</span> 
-
+        <span class="k">if</span> <span class="n">num_iter</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">'#********* The Beginning **********#'</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">stateVariable</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">stateDepFactor</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">num_iter</span> <span class="o">==</span> <span class="n">Repeat</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span> 
+            <span class="k">print</span><span class="p">(</span><span class="s">'#********* The Ending **********#'</span><span class="p">)</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">stateVariable</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">stateDepFactor</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            
         <span class="n">forces_vec</span>                    <span class="o">=</span> <span class="n">calc</span><span class="p">.</span><span class="n">calcForceModified</span><span class="p">(</span><span class="n">num_particles</span><span class="p">,</span> 
                                                                <span class="n">fvX</span><span class="p">,</span> 
                                                                <span class="n">fvY</span><span class="p">,</span> 
@@ -270,127 +272,17 @@ This simulation is designed for 2D space but it can be also implemented in 3D
                                                                <span class="n">stateDepFactor</span><span class="p">,</span> 
                                                                <span class="n">mig_factor</span><span class="p">)</span>
         
+        <span class="c1">#print(forces_vec[1])
+</span>        
         <span class="c1"># Feed external forces into OpenMM
 </span>        <span class="n">in_force</span><span class="p">.</span><span class="n">updateForceInContext</span><span class="p">(</span><span class="n">simulation</span><span class="p">.</span><span class="n">context</span><span class="p">,</span> <span class="n">forces_vec</span><span class="p">)</span>
         <span class="c1"># Advance simulation for 1 steps
 </span>        <span class="n">simulation</span><span class="p">.</span><span class="n">step</span><span class="p">(</span><span class="n">stepFreq</span><span class="p">)</span>
         <span class="n">state</span> <span class="o">=</span> <span class="n">simulation</span><span class="p">.</span><span class="n">context</span><span class="p">.</span><span class="n">getState</span><span class="p">(</span><span class="n">getEnergy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">getForces</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
         <span class="n">time</span> <span class="o">+=</span> <span class="n">stepFreq</span>
+        <span class="n">time_state</span> <span class="o">+=</span> <span class="n">stepFreq</span>
     
-    <span class="s">'''
-    print('Simulation is completed')
-    print('--- %s secs ---' % (timer.time()-start))
-    print('--- %s mins ---' % ((timer.time()-start)/60))
-    print('--- %s hrs ---' % ((timer.time()-start)/3600))
-    '''</span>
     
-    <span class="c1"># storing final position 
-</span>    <span class="n">resting_final</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="n">rest_cell_no</span><span class="p">])</span>
-    <span class="n">activated_final</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="n">act_cell_no</span><span class="p">])</span>
-
-    <span class="n">positions</span> <span class="o">=</span> <span class="n">simulation</span><span class="p">.</span><span class="n">context</span><span class="p">.</span><span class="n">getState</span><span class="p">(</span><span class="n">getPositions</span><span class="o">=</span><span class="bp">True</span><span class="p">).</span><span class="n">getPositions</span><span class="p">()</span>
-
-    <span class="n">rest_cnt</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">act_cnt</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">cell_cnt</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">positions</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">marker</span><span class="p">[</span><span class="n">cell_cnt</span><span class="p">]</span> <span class="o">==</span> <span class="s">'resting'</span> <span class="p">:</span>
-            <span class="n">resting_final</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">rest_cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="n">value_in_unit</span><span class="p">(</span><span class="n">angstroms</span><span class="p">)</span>
-            <span class="n">resting_final</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">rest_cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">].</span><span class="n">value_in_unit</span><span class="p">(</span><span class="n">angstroms</span><span class="p">)</span>
-            <span class="n">rest_cnt</span> <span class="o">+=</span> <span class="mi">1</span>
-            
-        <span class="k">elif</span> <span class="n">marker</span><span class="p">[</span><span class="n">cell_cnt</span><span class="p">]</span> <span class="o">==</span> <span class="s">'activated'</span><span class="p">:</span>
-            <span class="n">activated_final</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">act_cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="n">value_in_unit</span><span class="p">(</span><span class="n">angstroms</span><span class="p">)</span>
-            <span class="n">activated_final</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">act_cnt</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">].</span><span class="n">value_in_unit</span><span class="p">(</span><span class="n">angstroms</span><span class="p">)</span>
-            <span class="n">act_cnt</span> <span class="o">+=</span> <span class="mi">1</span>
-
-        <span class="n">cell_cnt</span> <span class="o">+=</span> <span class="mi">1</span>
-
-    <span class="n">dist_x_rest</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">resting_start</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">resting_final</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">dist_x_act</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">activated_start</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">activated_final</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-    <span class="n">dist_y_rest</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">resting_start</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">resting_final</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">dist_y_act</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">activated_start</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">activated_final</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">dist_r_rest</span> <span class="o">=</span> <span class="p">(</span><span class="n">dist_x_rest</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">dist_y_rest</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
-    <span class="n">dist_r_act</span> <span class="o">=</span> <span class="p">(</span><span class="n">dist_x_act</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">dist_y_act</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
-    
-    <span class="kn">import</span> <span class="nn">statistics</span> 
-    <span class="c1"># average
-</span>    <span class="n">dist_x_rest_avg</span> <span class="o">=</span> <span class="n">statistics</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist_x_rest</span><span class="p">)</span>
-    <span class="n">dist_x_act_avg</span> <span class="o">=</span> <span class="n">statistics</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist_x_act</span><span class="p">)</span>
-    <span class="n">dist_y_rest_avg</span> <span class="o">=</span> <span class="n">statistics</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist_y_rest</span><span class="p">)</span>
-    <span class="n">dist_y_act_avg</span> <span class="o">=</span> <span class="n">statistics</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist_y_act</span><span class="p">)</span>
-    <span class="n">dist_r_rest_avg</span> <span class="o">=</span> <span class="n">statistics</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist_r_rest</span><span class="p">)</span>
-    <span class="n">dist_r_act_avg</span> <span class="o">=</span> <span class="n">statistics</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dist_r_act</span><span class="p">)</span>
-    <span class="c1"># standard deviation 
-</span>    <span class="n">dist_x_rest_std</span> <span class="o">=</span> <span class="n">statistics</span><span class="p">.</span><span class="n">stdev</span><span class="p">(</span><span class="n">dist_x_rest</span><span class="p">)</span>
-    <span class="n">dist_x_act_std</span> <span class="o">=</span> <span class="n">statistics</span><span class="p">.</span><span class="n">stdev</span><span class="p">(</span><span class="n">dist_x_act</span><span class="p">)</span>
-    <span class="n">dist_y_rest_std</span> <span class="o">=</span> <span class="n">statistics</span><span class="p">.</span><span class="n">stdev</span><span class="p">(</span><span class="n">dist_y_rest</span><span class="p">)</span>
-    <span class="n">dist_y_act_std</span> <span class="o">=</span> <span class="n">statistics</span><span class="p">.</span><span class="n">stdev</span><span class="p">(</span><span class="n">dist_y_act</span><span class="p">)</span>
-    <span class="n">dist_r_rest_std</span> <span class="o">=</span> <span class="n">statistics</span><span class="p">.</span><span class="n">stdev</span><span class="p">(</span><span class="n">dist_r_rest</span><span class="p">)</span>
-    <span class="n">dist_r_act_std</span> <span class="o">=</span> <span class="n">statistics</span><span class="p">.</span><span class="n">stdev</span><span class="p">(</span><span class="n">dist_r_act</span><span class="p">)</span>
-    <span class="c1"># standard error
-</span>    <span class="n">dist_x_rest_sem</span> <span class="o">=</span> <span class="n">dist_x_rest_std</span><span class="o">/</span><span class="p">(</span><span class="n">rest_cell_no</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="n">dist_x_act_sem</span> <span class="o">=</span> <span class="n">dist_x_act_std</span><span class="o">/</span><span class="p">(</span><span class="n">act_cell_no</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="n">dist_y_rest_sem</span> <span class="o">=</span> <span class="n">dist_y_rest_std</span><span class="o">/</span><span class="p">(</span><span class="n">rest_cell_no</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="n">dist_y_act_sem</span> <span class="o">=</span> <span class="n">dist_y_act_std</span><span class="o">/</span><span class="p">(</span><span class="n">act_cell_no</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="n">dist_r_rest_sem</span> <span class="o">=</span> <span class="n">dist_r_rest_std</span><span class="o">/</span><span class="p">(</span><span class="n">rest_cell_no</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="n">dist_r_act_sem</span> <span class="o">=</span> <span class="n">dist_r_act_std</span><span class="o">/</span><span class="p">(</span><span class="n">act_cell_no</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
-
-    <span class="n">stats1</span> <span class="o">=</span><span class="p">{</span><span class="s">'x_rest_avg'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_x_rest_avg</span><span class="p">),</span>
-             <span class="s">'x_rest_std'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_x_rest_std</span><span class="p">),</span>
-             <span class="s">'x_rest_err'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_x_rest_sem</span><span class="p">),</span>
-             <span class="s">'y_rest_avg'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_y_rest_avg</span><span class="p">),</span>
-             <span class="s">'y_rest_std'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_y_rest_std</span><span class="p">),</span>
-             <span class="s">'y_rest_err'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_y_rest_sem</span><span class="p">),</span>
-             <span class="s">'r_rest_avg'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_r_rest_avg</span><span class="p">),</span>
-             <span class="s">'r_rest_std'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_r_rest_std</span><span class="p">),</span>
-             <span class="s">'r_rest_err'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_r_rest_sem</span><span class="p">)}</span>
-
-    <span class="n">stats2</span> <span class="o">=</span><span class="p">{</span><span class="s">'x_act_avg'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_x_act_avg</span><span class="p">),</span>
-             <span class="s">'x_act_std'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_x_act_std</span><span class="p">),</span>
-             <span class="s">'x_act_err'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_x_act_sem</span><span class="p">),</span>
-             <span class="s">'y_act_avg'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_y_act_avg</span><span class="p">),</span>
-             <span class="s">'y_act_std'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_y_act_std</span><span class="p">),</span>
-             <span class="s">'y_act_err'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_y_act_sem</span><span class="p">),</span>
-             <span class="s">'r_act_avg'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_r_act_avg</span><span class="p">),</span>
-             <span class="s">'r_act_std'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_r_act_std</span><span class="p">),</span>
-             <span class="s">'r_act_err'</span><span class="p">:</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_r_act_sem</span><span class="p">)}</span>
-
-    <span class="n">stat_data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'resting'</span><span class="p">:</span><span class="n">stats1</span><span class="p">,</span> <span class="s">'activated'</span><span class="p">:</span><span class="n">stats2</span><span class="p">}</span>
-    
-    <span class="n">dist_x_r</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">dist_y_r</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">dist_r_r</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">dist_x_a</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">dist_y_a</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">dist_r_a</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dist_x_rest</span><span class="p">)):</span>
-        <span class="n">dist_x_r</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_x_rest</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
-        <span class="n">dist_y_r</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_y_rest</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
-        <span class="n">dist_r_r</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_r_rest</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
-
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dist_x_act</span><span class="p">)):</span>
-        <span class="n">dist_x_a</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_x_act</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
-        <span class="n">dist_y_a</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_y_act</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
-        <span class="n">dist_r_a</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dist_r_act</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
-
-    <span class="n">raw_data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'n_r'</span> <span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dist_x_rest</span><span class="p">)),</span>
-                <span class="s">'n_a'</span> <span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dist_x_act</span><span class="p">)),</span>
-                <span class="s">'x_r'</span> <span class="p">:</span> <span class="n">dist_x_r</span><span class="p">,</span>
-                <span class="s">'y_r'</span> <span class="p">:</span> <span class="n">dist_y_r</span><span class="p">,</span>
-                <span class="s">'r_r'</span> <span class="p">:</span> <span class="n">dist_r_r</span><span class="p">,</span>
-                <span class="s">'x_a'</span> <span class="p">:</span> <span class="n">dist_x_a</span><span class="p">,</span>
-                <span class="s">'y_a'</span> <span class="p">:</span> <span class="n">dist_y_a</span><span class="p">,</span>
-                <span class="s">'r_a'</span> <span class="p">:</span> <span class="n">dist_r_a</span><span class="p">}</span>
-
-    <span class="kn">import</span> <span class="nn">yaml</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dcdfilename</span><span class="o">+</span><span class="s">'_raw.yaml'</span><span class="p">,</span><span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file1</span><span class="p">:</span>
-        <span class="n">document</span> <span class="o">=</span> <span class="n">yaml</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">raw_data</span><span class="p">,</span><span class="n">file1</span><span class="p">,</span><span class="n">default_flow_style</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dcdfilename</span><span class="o">+</span><span class="s">'_all.yaml'</span><span class="p">,</span><span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">file3</span><span class="p">:</span>
-        <span class="n">document</span> <span class="o">=</span> <span class="n">yaml</span><span class="p">.</span><span class="n">dump</span><span class="p">(</span><span class="n">stat_data</span><span class="p">,</span><span class="n">file3</span><span class="p">,</span><span class="n">default_flow_style</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
 <span class="c1">#!/usr/bin/env python
 </span><span class="kn">import</span> <span class="nn">sys</span>

@@ -195,8 +195,8 @@ def simulator(oriConc = 10,                     # the max concentration released
     
     
     ## Set the initial stateVariable: Starting from 0 for now. 
-    odeiter = 5
-    stateVariable = np.zeros([num_particles])
+    #odeiter = 5
+    stateVariable = np.ones([num_particles])
 
     # storing initial position 
     rest_cell_no = int(numOfCells1*restingRatio1)+int(numOfCells2*restingRatio2)+2
@@ -224,13 +224,15 @@ def simulator(oriConc = 10,                     # the max concentration released
         cell_cnt += 1
 
     print("|------ calibration initiated -----|")
-    for num_iter in range(1, 10000): ### What is this? 
+    for num_iter in range(1, 2000): ### What is this? 
         positions = simulation.context.getState(getPositions=True).getPositions()
         simulation.step(stepFreq)
         state = simulation.context.getState(getEnergy=True, getForces=True)
         time += stepFreq
     
     print("|----- simulation initiated -----|")
+    
+    time_state = 1e-14
     for num_iter in range(1, Repeat): ### What is this? 
         positions = simulation.context.getState(getPositions=True).getPositions()
         # forces_vec will contain external forces that we want to feed into OpenMM.
@@ -248,7 +250,7 @@ def simulator(oriConc = 10,                     # the max concentration released
                                                    oriConc,
                                                    cellConc,
                                                    Diff,
-                                                   time,
+                                                   time_state,
                                                    kd,
                                                    highBC,
                                                    DispScale,
@@ -258,18 +260,18 @@ def simulator(oriConc = 10,                     # the max concentration released
                                                    DiffState,
                                                    ConcByCell)
         
-        if num_iter == 0:
-            timeb = 0
-        else:
-            timeb = time - stepFreq
-        
+        #print(ConcbyCell[1])
         stateVariable, stateDepFactor = calc.calcStateVariable(num_particles, 
-                                                               odeiter, 
-                                                               timeb, 
-                                                               time, 
+                                                               time_state, 
                                                                ConcbyCell, 
                                                                stateVariable) 
-
+        if num_iter == 1:
+            print('#********* The Beginning **********#')
+            print(stateVariable[1],stateDepFactor[1])
+        elif num_iter == Repeat - 1: 
+            print('#********* The Ending **********#')
+            print(stateVariable[1],stateDepFactor[1])
+            
         forces_vec                    = calc.calcForceModified(num_particles, 
                                                                fvX, 
                                                                fvY, 
@@ -277,127 +279,17 @@ def simulator(oriConc = 10,                     # the max concentration released
                                                                stateDepFactor, 
                                                                mig_factor)
         
+        #print(forces_vec[1])
+        
         # Feed external forces into OpenMM
         in_force.updateForceInContext(simulation.context, forces_vec)
         # Advance simulation for 1 steps
         simulation.step(stepFreq)
         state = simulation.context.getState(getEnergy=True, getForces=True)
         time += stepFreq
+        time_state += stepFreq
     
-    '''
-    print('Simulation is completed')
-    print('--- %s secs ---' % (timer.time()-start))
-    print('--- %s mins ---' % ((timer.time()-start)/60))
-    print('--- %s hrs ---' % ((timer.time()-start)/3600))
-    '''
     
-    # storing final position 
-    resting_final = np.zeros([2,rest_cell_no])
-    activated_final = np.zeros([2,act_cell_no])
-
-    positions = simulation.context.getState(getPositions=True).getPositions()
-
-    rest_cnt = 0
-    act_cnt = 0
-    cell_cnt = 0
-
-    for pos in enumerate(positions):
-        if marker[cell_cnt] == 'resting' :
-            resting_final[0][rest_cnt] = pos[1][0].value_in_unit(angstroms)
-            resting_final[1][rest_cnt] = pos[1][1].value_in_unit(angstroms)
-            rest_cnt += 1
-            
-        elif marker[cell_cnt] == 'activated':
-            activated_final[0][act_cnt] = pos[1][0].value_in_unit(angstroms)
-            activated_final[1][act_cnt] = pos[1][1].value_in_unit(angstroms)
-            act_cnt += 1
-
-        cell_cnt += 1
-
-    dist_x_rest = abs(resting_start[0] - resting_final[0])
-    dist_x_act = abs(activated_start[0] - activated_final[0])
-    dist_y_rest = abs(resting_start[1] - resting_final[1])
-    dist_y_act = abs(activated_start[1] - activated_final[1])
-    dist_r_rest = (dist_x_rest**2 + dist_y_rest**2)**0.5
-    dist_r_act = (dist_x_act**2 + dist_y_act**2)**0.5
-    
-    import statistics 
-    # average
-    dist_x_rest_avg = statistics.mean(dist_x_rest)
-    dist_x_act_avg = statistics.mean(dist_x_act)
-    dist_y_rest_avg = statistics.mean(dist_y_rest)
-    dist_y_act_avg = statistics.mean(dist_y_act)
-    dist_r_rest_avg = statistics.mean(dist_r_rest)
-    dist_r_act_avg = statistics.mean(dist_r_act)
-    # standard deviation 
-    dist_x_rest_std = statistics.stdev(dist_x_rest)
-    dist_x_act_std = statistics.stdev(dist_x_act)
-    dist_y_rest_std = statistics.stdev(dist_y_rest)
-    dist_y_act_std = statistics.stdev(dist_y_act)
-    dist_r_rest_std = statistics.stdev(dist_r_rest)
-    dist_r_act_std = statistics.stdev(dist_r_act)
-    # standard error
-    dist_x_rest_sem = dist_x_rest_std/(rest_cell_no**0.5)
-    dist_x_act_sem = dist_x_act_std/(act_cell_no**0.5)
-    dist_y_rest_sem = dist_y_rest_std/(rest_cell_no**0.5)
-    dist_y_act_sem = dist_y_act_std/(act_cell_no**0.5)
-    dist_r_rest_sem = dist_r_rest_std/(rest_cell_no**0.5)
-    dist_r_act_sem = dist_r_act_std/(act_cell_no**0.5)
-
-    stats1 ={'x_rest_avg':str(dist_x_rest_avg),
-             'x_rest_std':str(dist_x_rest_std),
-             'x_rest_err':str(dist_x_rest_sem),
-             'y_rest_avg':str(dist_y_rest_avg),
-             'y_rest_std':str(dist_y_rest_std),
-             'y_rest_err':str(dist_y_rest_sem),
-             'r_rest_avg':str(dist_r_rest_avg),
-             'r_rest_std':str(dist_r_rest_std),
-             'r_rest_err':str(dist_r_rest_sem)}
-
-    stats2 ={'x_act_avg':str(dist_x_act_avg),
-             'x_act_std':str(dist_x_act_std),
-             'x_act_err':str(dist_x_act_sem),
-             'y_act_avg':str(dist_y_act_avg),
-             'y_act_std':str(dist_y_act_std),
-             'y_act_err':str(dist_y_act_sem),
-             'r_act_avg':str(dist_r_act_avg),
-             'r_act_std':str(dist_r_act_std),
-             'r_act_err':str(dist_r_act_sem)}
-
-    stat_data = {'resting':stats1, 'activated':stats2}
-    
-    dist_x_r = []
-    dist_y_r = []
-    dist_r_r = []
-    dist_x_a = []
-    dist_y_a = []
-    dist_r_a = []
-
-    for i in np.arange(len(dist_x_rest)):
-        dist_x_r.append(str(dist_x_rest[i]))
-        dist_y_r.append(str(dist_y_rest[i]))
-        dist_r_r.append(str(dist_r_rest[i]))
-
-    for j in np.arange(len(dist_x_act)):
-        dist_x_a.append(str(dist_x_act[j]))
-        dist_y_a.append(str(dist_y_act[j]))
-        dist_r_a.append(str(dist_r_act[j]))
-
-    raw_data = {'n_r' : str(len(dist_x_rest)),
-                'n_a' : str(len(dist_x_act)),
-                'x_r' : dist_x_r,
-                'y_r' : dist_y_r,
-                'r_r' : dist_r_r,
-                'x_a' : dist_x_a,
-                'y_a' : dist_y_a,
-                'r_a' : dist_r_a}
-
-    import yaml
-    with open(dcdfilename+'_raw.yaml','w') as file1:
-        document = yaml.dump(raw_data,file1,default_flow_style=False)
-
-    with open(dcdfilename+'_all.yaml','w') as file3:
-        document = yaml.dump(stat_data,file3,default_flow_style=False)
 
 #!/usr/bin/env python
 import sys
