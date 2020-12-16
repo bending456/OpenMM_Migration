@@ -33,6 +33,7 @@ def DistCelltoOrigin(CellCoord,
     NoOfCell                  = np.shape(CellCoord)[1]
     CelltoOrigin_r            = np.zeros(NoOfCell)
     xOrigin, yOrigin, zOrigin = Origin
+    xyOrigin = np.array([xOrigin,yOrigin])
 
     for nthCell in np.arange(NoOfCell):
         
@@ -41,9 +42,8 @@ def DistCelltoOrigin(CellCoord,
             xCell = CellCoord[0][nthCell]
             dist = abs(xCell-xOrigin)
         elif SourceOfOrigin == 'Center':
-            xCell = CellCoord[0][nthCell]
-            yCell = CellCoord[0][nthCell]
-            dist = np.sqrt((xCell-xOrigin)**2 + (yCell-yOrigin)**2)
+            xyCell = np.array([CellCoord[0][nthCell],CellCoord[1][nthCell]])
+            dist = np.linalg.norm(xyCell-xyOrigin)
         
         CelltoOrigin_r[nthCell] = dist.copy()
         
@@ -180,10 +180,17 @@ def forceGen(ConcByCell,
 
     # the distance from the one end where ATP is being released
     if SourceOfOrigin is None:
-        rSource = np.array([abs(Origin[0]-xtest[0]),abs(Origin[0]-xtest[1]),abs(Origin[0]-xtest[2])])
-        Conc_Origin = ConcByOrigin(rSource,t,D,oriConc,state,Origin)
-        COarray = np.array([Conc_Origin[0],Conc_Origin[2],Conc_Origin[1],Conc_Origin[1],Conc_Origin[1]])
-
+        #rSource = np.array([abs(Origin[0]-xtest[0]),abs(Origin[0]-xtest[1]),abs(Origin[0]-xtest[2])])
+        r0 = abs(Origin[0]-xtest[0])
+        r1 = abs(Origin[0]-xtest[1])
+        r2 = abs(Origin[0]-xtest[2])
+        
+        Conc_Origin0 = ConcByOrigin(r0,t,D,oriConc,state,Origin)
+        Conc_Origin1 = ConcByOrigin(r0,t,D,oriConc,state,Origin)
+        Conc_Origin2 = ConcByOrigin(r0,t,D,oriConc,state,Origin)
+        
+        COarray = np.array([Conc_Origin0,Conc_Origin2,Conc_Origin1,Conc_Origin1,Conc_Origin1])
+        #print(len(COarray))
 
     elif SourceOfOrigin == 'Center':
         xSource = np.array([(Origin[0]-x0),(Origin[0]-x1),(Origin[0]-x2)])**2
@@ -230,8 +237,8 @@ def forceGen(ConcByCell,
         yp = yprob[nthCell]    
         DispY = dy*yp
         
-        FVectorX[nthCell] = DisplacementScaleByConc*(DispX + xrand[nthCell]*0.015)*ConcTotal[4]
-        FVectorY[nthCell] = DisplacementScaleByConc*(DispY + yrand[nthCell]*0.015)*ConcTotal[4]
+        FVectorX[nthCell] = DisplacementScaleByConc*(DispX + xrand[nthCell]*0.02)*ConcTotal[4]
+        FVectorY[nthCell] = DisplacementScaleByConc*(DispY + yrand[nthCell]*0.02)*ConcTotal[4]
         FVectorZ[nthCell] = 0
     
     return FVectorX, FVectorY, FVectorZ

@@ -3,7 +3,7 @@ import numpy as np
 import yaml
 import time as timer
 
-time = 20000
+time = 10000
 DispScale = 3000 #2500
 highlim = 150
 the_len_of_1st_box = 0 #highlim*3
@@ -13,7 +13,7 @@ oriConc = 5.0
 restingratio1 = 0.5
 restingratio2 = [0.1]#,0.5,0.9]
 shape = 'slab'       # slab - work with SourceOfOrigin = None or square - work with SourceOfOrigin = Center 
-DiffState = 'error'  # error (for error function), steady, or linear 
+DiffState = 'steady'  # error (for error function), steady, or linear 
 DiffRate = 0.5
 
 

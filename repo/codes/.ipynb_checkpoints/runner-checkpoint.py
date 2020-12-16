@@ -217,7 +217,7 @@ def simulator(oriConc = 10,                     # the max concentration released
         cell_cnt += 1
 
     print("|------ calibration initiated -----|")
-    for num_iter in range(1, 2000): ### What is this? 
+    for num_iter in range(1, 10000): ### What is this? 
         positions = simulation.context.getState(getPositions=True).getPositions()
         simulation.step(stepFreq)
         state = simulation.context.getState(getEnergy=True, getForces=True)
@@ -258,9 +258,13 @@ def simulator(oriConc = 10,                     # the max concentration released
                                                                time_state, 
                                                                ConcbyCell, 
                                                                stateVariable) 
-        
-        print(stateVariable[1],stateDepFactor[1])
-        
+        if num_iter == 1:
+            print('#********* The Beginning **********#')
+            print(stateVariable[1],stateDepFactor[1])
+        elif num_iter == Repeat - 1: 
+            print('#********* The Ending **********#')
+            print(stateVariable[1],stateDepFactor[1])
+            
         forces_vec                    = calc.calcForceModified(num_particles, 
                                                                fvX, 
                                                                fvY, 
