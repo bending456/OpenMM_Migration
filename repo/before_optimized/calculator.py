@@ -395,38 +395,33 @@ def calcForce(positions,
 ###                        Written by Ben and implemented by Ben                            ###
 ###############################################################################################
 
+def stateFunc(y,t,c):
+    ## Rate of state transition 
+    kf = 0.1
+    kb = 0.01
+    
+    dydt = kf*c*(1-y) - kb*y
+    
+    return dydt
+
 def calcStateVariable(numberOfCells,
+                      repeat,
+                      timeb,
                       time,
                       ConcbyCell,
                       stateVariable):
     
-    #t = scipy.linspace(timeb,time,repeat)
+    t = scipy.linspace(timeb,time,repeat)
     newstateVar = []
     stateDepFactor = []
        
     for n in np.arange(numberOfCells):
         
-        # This is exponential function that is fitted to the exponential function 
-        if ConcbyCell[n] > 1:
-            coefficient = (1-1/ConcbyCell[n])
-        elif ConcbyCell[n] > 0.9 - 1e-14 and ConcbyCell[n] < 1 + 1e-14:
-            coefficient = 0.5
-        elif ConcbyCell[n] > 0.8 - 1e-14 and ConcbyCell[n] < 0.9 + 1e-14:
-            coefficient = 0.45
-        elif ConcbyCell[n] > 0.7 - 1e-14 and ConcbyCell[n] < 0.8 + 1e-14:
-            coefficient = 0.4
-        elif ConcbyCell[n] > 0.5 - 1e-14 and ConcbyCell[n] < 0.7 + 1e-14:
-            coefficient = 0.35
-        elif ConcbyCell[n] > 0.2 - 1e-14 and ConcbyCell[n] < 0.5 + 1e-14:
-            coefficient = 0.3
-        else:
-            coefficient = ConcbyCell[n]
-            
-        Var = coefficient*np.exp(-0.001*time-0.001*ConcbyCell[n]*time) + 0.001/(0.001 + 0.001*ConcbyCell[n])
-        #print(ConcbyCell[n])
-        newstateVar.append(Var)
-        state = 1/(1+(0.2/Var)**5)
-        stateDepFactor.append(state)
+        stateVar = odeint(stateFunc,stateVariable[n],t,args=(ConcbyCell[n],))
+        dummy1 = np.float(stateVar[-1])
+        newstateVar.append(dummy1)
+        dummy2 = 1/(1+dummy1/0.50)
+        stateDepFactor.append(dummy2)
         
     return newstateVar, stateDepFactor
 

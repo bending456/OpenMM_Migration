@@ -173,23 +173,40 @@ def forceGen(ConcByCell,
     FVectorZ = np.zeros(NoOfCell)
     
     # x
-    xtest = np.array([CellCoord[0]-searchingRange,CellCoord[0],CellCoord[0]+searchingRange])
+    x0 = CellCoord[0]-searchingRange
+    x1 = CellCoord[0]
+    x2 = CellCoord[0]+searchingRange
 
-    # y
-    ytest = np.array([CellCoord[1]-searchingRange,CellCoord[1],CellCoord[1]+searchingRange])
+    # y 
+    y0 = CellCoord[1]-searchingRange
+    y1 = CellCoord[1]
+    y2 = CellCoord[1]+searchingRange
 
     # the distance from the one end where ATP is being released
-    if SourceOfOrigin is None:
-        rSource = np.array([abs(Origin[0]-xtest[0]),abs(Origin[0]-xtest[1]),abs(Origin[0]-xtest[2])])
-        Conc_Origin = ConcByOrigin(rSource,t,D,oriConc,state,Origin)
-        COarray = np.array([Conc_Origin[0],Conc_Origin[2],Conc_Origin[1],Conc_Origin[1],Conc_Origin[1]])
-
+    if SourceOfOrigin is None: 
+        r0 = abs(Origin[0]-x0)
+        r1 = abs(Origin[0]-x1)
+        r2 = abs(Origin[0]-x2)
+        Conc_Origin0 = ConcByOrigin(r0,t,D,oriConc,state,Origin)
+        Conc_Origin1 = ConcByOrigin(r1,t,D,oriConc,state,Origin)
+        Conc_Origin2 = ConcByOrigin(r2,t,D,oriConc,state,Origin)
+        CO01 = Conc_Origin0
+        CO21 = Conc_Origin2
+        CO10 = Conc_Origin1
+        CO12 = Conc_Origin1
+        CO11 = Conc_Origin1
 
     elif SourceOfOrigin == 'Center':
-        xSource = np.array([(Origin[0]-x0),(Origin[0]-x1),(Origin[0]-x2)])**2
-        ySource = np.array([(Origin[1]-y0),(Origin[1]-y1),(Origin[1]-y2)])**2
-        rSource = np.sqrt(np.array([xSource[0]+ySource[1],xSource[2]+ySource[1],xSource[1]+ySource[0],xSource[0]+ySource[2],xSource[1]+ySource[1]]))
-        COarray = ConcByOrigin(rSource,t,D,oriConc,state,Origin)
+        r01 = np.sqrt((Origin[0]-x0)**2 + (Origin[1]-y1)**2)
+        r21 = np.sqrt((Origin[0]-x2)**2 + (Origin[1]-y1)**2)
+        r10 = np.sqrt((Origin[0]-x1)**2 + (Origin[1]-y0)**2)
+        r12 = np.sqrt((Origin[0]-x0)**2 + (Origin[1]-y2)**2)
+        r11 = np.sqrt((Origin[0]-x1)**2 + (Origin[1]-y1)**2)
+        CO01 = ConcByOrigin(r01,t,D,oriConc,state,Origin)
+        CO21 = ConcByOrigin(r21,t,D,oriConc,state,Origin)
+        CO10 = ConcByOrigin(r10,t,D,oriConc,state,Origin)
+        CO12 = ConcByOrigin(r12,t,D,oriConc,state,Origin)
+        CO11 = ConcByOrigin(r11,t,D,oriConc,state,Origin)    
 
 
     xcell = CellCoord[0]
@@ -208,18 +225,22 @@ def forceGen(ConcByCell,
         rfromCells10 = np.sqrt((xcell-xcell[nthCell])**2 + (ycell-(ycell[nthCell]-searchingRange))**2)
         rfromCells12 = np.sqrt((xcell-xcell[nthCell])**2 + (ycell-(ycell[nthCell]+searchingRange))**2)
         rfromCells11 = np.sqrt((xcell-xcell[nthCell])**2 + (ycell-ycell[nthCell])**2)
+
+        Conc_Cell01 = sum(HillsCoefficient[nthCell]*func(rfromCells01,t,D)*cellConc)
+        Conc_Cell21 = sum(HillsCoefficient[nthCell]*func(rfromCells21,t,D)*cellConc)
+        Conc_Cell10 = sum(HillsCoefficient[nthCell]*func(rfromCells10,t,D)*cellConc)
+        Conc_Cell12 = sum(HillsCoefficient[nthCell]*func(rfromCells12,t,D)*cellConc)
+        Conc_Cell11 = sum(HillsCoefficient[nthCell]*func(rfromCells11,t,D)*cellConc)
         
-        CCarray = np.array([sum(HillsCoefficient*func(rfromCells01,t,D)*cellConc),
-                            sum(HillsCoefficient*func(rfromCells21,t,D)*cellConc),
-                            sum(HillsCoefficient*func(rfromCells10,t,D)*cellConc),
-                            sum(HillsCoefficient*func(rfromCells12,t,D)*cellConc),
-                            sum(HillsCoefficient*func(rfromCells11,t,D)*cellConc)])
-        
-        ConcTotal = np.array([COarray[0][nthCell],COarray[1][nthCell],COarray[2][nthCell],COarray[3][nthCell],COarray[4][nthCell]]) + CCarray
+        ConcTotal01 = CO01[nthCell] + Conc_Cell01
+        ConcTotal21 = CO21[nthCell] + Conc_Cell21 
+        ConcTotal10 = CO10[nthCell] + Conc_Cell10 
+        ConcTotal12 = CO12[nthCell] + Conc_Cell12 
+        ConcTotal11 = CO11[nthCell] + Conc_Cell11
 
         ## Calculating the concentration gradient         
-        dx = (ConcTotal[1] - ConcTotal[0])/2
-        dy = (ConcTotal[3] - ConcTotal[2])/2
+        dx = (ConcTotal21 - ConcTotal01)/2
+        dy = (ConcTotal12 - ConcTotal10)/2
         dz = 0
         
         # Determining in X direction force
@@ -230,8 +251,8 @@ def forceGen(ConcByCell,
         yp = yprob[nthCell]    
         DispY = dy*yp
         
-        FVectorX[nthCell] = DisplacementScaleByConc*(DispX + xrand[nthCell]*0.015)*ConcTotal[4]
-        FVectorY[nthCell] = DisplacementScaleByConc*(DispY + yrand[nthCell]*0.015)*ConcTotal[4]
+        FVectorX[nthCell] = DisplacementScaleByConc*(DispX + xrand[nthCell]*0.015)*ConcTotal11
+        FVectorY[nthCell] = DisplacementScaleByConc*(DispY + yrand[nthCell]*0.015)*ConcTotal11
         FVectorZ[nthCell] = 0
     
     return FVectorX, FVectorY, FVectorZ
