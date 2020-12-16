@@ -13,7 +13,7 @@
   },"2": {
     "doc": "12/15/2020",
     "title": "Main Task",
-    "content": "1. Writing Tutorial . Task Detail . | . | . [Note] . ",
+    "content": "1. Writing Tutorial . Task Detail . | ODE solving part has been removed to make the calculation faster. | Can we just simply use the decay function for the activity? | This solved ODE in the calculation | . | . [Note] . ",
     "url": "http://localhost:4000/pages/user_guides/journals/2_201215.html#main-task",
     "relUrl": "/pages/user_guides/journals/2_201215.html#main-task"
   },"3": {
