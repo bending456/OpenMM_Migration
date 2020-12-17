@@ -83,7 +83,7 @@ def simulator(oriConc = 10,                     # the max concentration released
 
     # Parameters determining the dynamics of cells 
     MassOfCell = 100
-    RepulsiveScale = 0.1 # this can determine the distance among cells themselves
+    RepulsiveScale = 0.01 # this can determine the distance among cells themselves
     ### Simulation parameters
     temperature = 295 #0.0    # K   <---- set to 0 to get rid of wiggling for now
     frictionCoeff = 1.0  # 1/ps
@@ -217,7 +217,7 @@ def simulator(oriConc = 10,                     # the max concentration released
         cell_cnt += 1
 
     print("|------ calibration initiated -----|")
-    for num_iter in range(1, 10000): ### What is this? 
+    for num_iter in range(1, 5000): ### What is this? 
         positions = simulation.context.getState(getPositions=True).getPositions()
         simulation.step(stepFreq)
         state = simulation.context.getState(getEnergy=True, getForces=True)
@@ -260,10 +260,10 @@ def simulator(oriConc = 10,                     # the max concentration released
                                                                stateVariable) 
         if num_iter == 1:
             print('#********* The Beginning **********#')
-            print(stateVariable[1],stateDepFactor[1])
+            print(fvX[1],fvY[1])
         elif num_iter == Repeat - 1: 
             print('#********* The Ending **********#')
-            print(stateVariable[1],stateDepFactor[1])
+            print(fvX[1],fvY[1])
             
         forces_vec                    = calc.calcForceModified(num_particles, 
                                                                fvX, 
@@ -356,7 +356,7 @@ if __name__ == "__main__":
   oriConc = 1 
   cellConc = 0.1  
   Diff = 20 
-  kd = 0.1  
+  kd = 0.5  
   DispScale = 100000
   searchingRange = 0.1
   restingRatio1 = 0.8
