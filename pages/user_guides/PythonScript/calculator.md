@@ -4,6 +4,10 @@ nav_order: 2
 parent: What's in Python Files?
 ---
 
+## Main purpose of this script...
+
+### Loading the required python package
+
 ```python
 ########################################################
 #### Sub functions that need for FeedInForce plugin ####
@@ -25,6 +29,19 @@ from scipy.optimize import curve_fit
 from scipy.integrate import odeint
 import yaml 
 ```
+
+### PDB file generator 
+- To initiate the calculation, regardless of dimension where particles or cells are distributed, we need to feed dummy PDB file. 
+    - The file generated from this script isn't really dummy at this point but it won't carry the meaningful/reasonable coordinates of particle. 
+    - However, it marks which particle represents "resting" cell and "activated" cells.
+        - Later, based on this information, we will employ different degree of autocrine (ATP-mediated ATP release from cell) and migration. 
+        - ***Warning***: This will be revisited to confirm.  
+- The way the cell will be placed is in two sections
+    - NoCell1: a number of cells in the first section 
+    - NoCell2: a number of cells in the second section 
+    - restingRatio1: a ratio of resting cell in the population of cells located in the first section 
+    - restingRatio2: a ratio of resting cell in the population of cells located in the second section. 
+- The sequence of particle number or atom number in PDB file matters to identify their position (section) and whether they are in resting or activated state. 
 
 ```python
 ###########################################################################
@@ -130,6 +147,10 @@ def PDBgenNoPBC(PDBfileName,
     return 
 ```
 
+### Cell/Particle Random Distributor 
+- Within a given dimension (not the same as PDB gen whose dimension is not suitable for the calculation), this code will place each particle with proper distance from themselves. 
+    - Algorithm is used. 
+    - There are two compartments. 
 
 ```python
 #######################################################################################

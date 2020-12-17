@@ -8,3 +8,6 @@ _site/repo/before_optimized/test1.dcd
 _site/repo/before_optimized/test1_raw.yaml
 _site/repo/before_optimized/test1_all.yaml
 _site/repo/before_optimized/dummy.yml
+*.dcd
+*.pdb
+*.yaml

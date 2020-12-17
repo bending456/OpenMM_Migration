@@ -33,6 +33,7 @@ def DistCelltoOrigin(CellCoord,
     NoOfCell                  = np.shape(CellCoord)[1]
     CelltoOrigin_r            = np.zeros(NoOfCell)
     xOrigin, yOrigin, zOrigin = Origin
+    xyOrigin = np.array([xOrigin,yOrigin])
 
     for nthCell in np.arange(NoOfCell):
         
@@ -41,9 +42,8 @@ def DistCelltoOrigin(CellCoord,
             xCell = CellCoord[0][nthCell]
             dist = abs(xCell-xOrigin)
         elif SourceOfOrigin == 'Center':
-            xCell = CellCoord[0][nthCell]
-            yCell = CellCoord[0][nthCell]
-            dist = np.sqrt((xCell-xOrigin)**2 + (yCell-yOrigin)**2)
+            xyCell = np.array([CellCoord[0][nthCell],CellCoord[1][nthCell]])
+            dist = np.linalg.norm(xyCell-xyOrigin)
         
         CelltoOrigin_r[nthCell] = dist.copy()
         
@@ -180,10 +180,17 @@ def forceGen(ConcByCell,
 
     # the distance from the one end where ATP is being released
     if SourceOfOrigin is None:
-        rSource = np.array([abs(Origin[0]-xtest[0]),abs(Origin[0]-xtest[1]),abs(Origin[0]-xtest[2])])
-        Conc_Origin = ConcByOrigin(rSource,t,D,oriConc,state,Origin)
-        COarray = np.array([Conc_Origin[0],Conc_Origin[2],Conc_Origin[1],Conc_Origin[1],Conc_Origin[1]])
-
+        #rSource = np.array([abs(Origin[0]-xtest[0]),abs(Origin[0]-xtest[1]),abs(Origin[0]-xtest[2])])
+        r0 = abs(Origin[0]-xtest[0])
+        r1 = abs(Origin[0]-xtest[1])
+        r2 = abs(Origin[0]-xtest[2])
+        
+        Conc_Origin0 = ConcByOrigin(r0,t,D,oriConc,state,Origin)
+        Conc_Origin1 = ConcByOrigin(r1,t,D,oriConc,state,Origin)
+        Conc_Origin2 = ConcByOrigin(r2,t,D,oriConc,state,Origin)
+        
+        COarray = np.array([Conc_Origin0,Conc_Origin2,Conc_Origin1,Conc_Origin1,Conc_Origin1])
+        #print(len(COarray))
 
     elif SourceOfOrigin == 'Center':
         xSource = np.array([(Origin[0]-x0),(Origin[0]-x1),(Origin[0]-x2)])**2
@@ -195,25 +202,28 @@ def forceGen(ConcByCell,
     xcell = CellCoord[0]
     ycell = CellCoord[1]
     
-    xprob = np.random.normal(0.25,1,NoOfCell)
-    yprob = np.random.normal(0.25,1,NoOfCell)
+    #xprob = np.random.normal(0.25,1,NoOfCell)
+    #yprob = np.random.normal(0.25,1,NoOfCell)
     
     xrand = np.random.normal(0,0.5,NoOfCell)
     yrand = np.random.normal(0,0.5,NoOfCell)
     
     for nthCell in np.arange(NoOfCell):
+        if cellConc == 0.0:
+            CCarray = np.zeros(5)
         
-        rfromCells01 = np.sqrt((xcell-(xcell[nthCell]-searchingRange))**2 + (ycell-ycell[nthCell])**2)
-        rfromCells21 = np.sqrt((xcell-(xcell[nthCell]+searchingRange))**2 + (ycell-ycell[nthCell])**2) 
-        rfromCells10 = np.sqrt((xcell-xcell[nthCell])**2 + (ycell-(ycell[nthCell]-searchingRange))**2)
-        rfromCells12 = np.sqrt((xcell-xcell[nthCell])**2 + (ycell-(ycell[nthCell]+searchingRange))**2)
-        rfromCells11 = np.sqrt((xcell-xcell[nthCell])**2 + (ycell-ycell[nthCell])**2)
-        
-        CCarray = np.array([sum(HillsCoefficient*func(rfromCells01,t,D)*cellConc),
-                            sum(HillsCoefficient*func(rfromCells21,t,D)*cellConc),
-                            sum(HillsCoefficient*func(rfromCells10,t,D)*cellConc),
-                            sum(HillsCoefficient*func(rfromCells12,t,D)*cellConc),
-                            sum(HillsCoefficient*func(rfromCells11,t,D)*cellConc)])
+        else:    
+            rfromCells01 = np.sqrt((xcell-(xcell[nthCell]-searchingRange))**2 + (ycell-ycell[nthCell])**2)
+            rfromCells21 = np.sqrt((xcell-(xcell[nthCell]+searchingRange))**2 + (ycell-ycell[nthCell])**2) 
+            rfromCells10 = np.sqrt((xcell-xcell[nthCell])**2 + (ycell-(ycell[nthCell]-searchingRange))**2)
+            rfromCells12 = np.sqrt((xcell-xcell[nthCell])**2 + (ycell-(ycell[nthCell]+searchingRange))**2)
+            rfromCells11 = np.sqrt((xcell-xcell[nthCell])**2 + (ycell-ycell[nthCell])**2)
+            
+            CCarray = np.array([sum(HillsCoefficient*func(rfromCells01,t,D)*cellConc),
+                                sum(HillsCoefficient*func(rfromCells21,t,D)*cellConc),
+                                sum(HillsCoefficient*func(rfromCells10,t,D)*cellConc),
+                                sum(HillsCoefficient*func(rfromCells12,t,D)*cellConc),
+                                sum(HillsCoefficient*func(rfromCells11,t,D)*cellConc)])
         
         ConcTotal = np.array([COarray[0][nthCell],COarray[1][nthCell],COarray[2][nthCell],COarray[3][nthCell],COarray[4][nthCell]]) + CCarray
 
@@ -223,13 +233,17 @@ def forceGen(ConcByCell,
         dz = 0
         
         # Determining in X direction force
-        xp = xprob[nthCell]
-        DispX = dx*xp
+        #xp = xprob[nthCell]
+        xp = np.random.normal(dx,abs(dx)*10)
+        DispX = xp
+        #DispX = dx*xp
         
         # Determining in Y direction force
-        yp = yprob[nthCell]    
-        DispY = dy*yp
-        
+        #yp = yprob[nthCell]
+        yp = np.random.normal(dy,abs(dy)*10)
+        DispY = yp
+        #DispY = dy*yp
+                
         FVectorX[nthCell] = DisplacementScaleByConc*(DispX + xrand[nthCell]*0.015)*ConcTotal[4]
         FVectorY[nthCell] = DisplacementScaleByConc*(DispY + yrand[nthCell]*0.015)*ConcTotal[4]
         FVectorZ[nthCell] = 0
