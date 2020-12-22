@@ -152,6 +152,10 @@ def PDBgenNoPBC(PDBfileName,
     - Algorithm is used. 
     - There are two compartments. 
 
+**Dimension of Simulation Box**
+- When the simulation box is set as "slab", then CentoR works with 0.
+- When the simulation box is set as "square", then CentoR is set as half length in x axis. 
+
 ```python
 #######################################################################################
 ###                           Cell/Particle Distributor                             ###
@@ -331,6 +335,14 @@ def genCellCoord3D(NoCell1,
     return coord, marker, migration_factor, autocrine_factor 
 ```
 
+### Force calculator based on the gradient of substance in media 
+1. Calculate the distance between cell and the source of chemoattractant 
+2. Calculate the distance (array) among cells 
+3. Calculate the local concentration contributed by the source 
+    - A function of distance between cell and source
+4. Calculate the concentration of substances contributed by the cell
+    - A function of distance among cells and concentration contributed by the source. 
+5. Calculate the concentration gradient-based migration driving force
 
 ```python
 ###############################################################################################
