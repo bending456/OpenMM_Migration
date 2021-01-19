@@ -128,7 +128,7 @@ def simulator(oriConc = 10,                     # the max concentration released
     system.addForce(force)
     ## This will generate more reasonable structure but still needs to take number of particle from the arbitrary structure 
     ## The reason I choose to do so is generating PDB file is little tricky due to its sensitivity to line arrangement 
-    min_dist_among_cells = 5
+    min_dist_among_cells = 2.5
     xlow_end = x[0]
     xhigh_end = x[1]
     ylow_end = y[0]

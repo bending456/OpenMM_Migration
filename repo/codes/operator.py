@@ -3,9 +3,9 @@ import numpy as np
 import yaml
 import time as timer
 
-time = 20000
-DispScale = 1000 #2500
-highlim = 150
+time = 5000
+DispScale = 100 #2500
+highlim = 100
 the_len_of_1st_box = 0 #highlim*3
 repeat = 1
 cellconc = 0.05
