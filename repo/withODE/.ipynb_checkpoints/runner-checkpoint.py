@@ -170,7 +170,7 @@ def simulator(oriConc = 10,                     # the max concentration released
     integrator = BrownianIntegrator(temperature, frictionCoeff, step_size)
 
     # Create platform
-    platform = Platform.getPlatformByName('CUDA')
+    platform = Platform.getPlatformByName('CPU')
 
     # Create simulation
     simulation = Simulation(pdb.topology, system, integrator, platform)
