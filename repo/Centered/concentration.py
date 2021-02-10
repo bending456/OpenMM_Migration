@@ -21,13 +21,13 @@ def func(r,t,D):
 ### This will be used to calculate the released substance concentration from the damaged cell at the given cell location 
 def DistCelltoOrigin(CellCoord,
                      Origin,
-                     SourceOfOrigin,
+                     shape_factor,
                      state):
     '''
     [Parameter descriptions]
     CellCoord:      the coordinates of particles 
     Origin:         the origin of chemoattractant source 
-    SourceOfOrigin: None = One end of simulation box in x axis, Center = the center of simulation box
+    shape_factor:   = 1 for square > 1 for slab
     state:          the characteristics of diffusion of chemoattractant: steady, error, or linear 
     '''
     NoOfCell                  = np.shape(CellCoord)[1]
@@ -38,10 +38,10 @@ def DistCelltoOrigin(CellCoord,
     for nthCell in np.arange(NoOfCell):
         
         # Differentiate the scheme of distasnce calculation between cells and the source of external chemoattractant source
-        if SourceOfOrigin is None:
+        if shape_factor > 1:
             xCell = CellCoord[0][nthCell]
             dist = abs(xCell-xOrigin)
-        elif SourceOfOrigin == 'Center':
+        elif shape_factor == 1:
             xyCell = np.array([CellCoord[0][nthCell],CellCoord[1][nthCell]])
             dist = np.linalg.norm(xyCell-xyOrigin)
         
@@ -137,7 +137,7 @@ def ConcByCell(ConcByOrigin,
 ### Generate the force of migration based on the gradient of chemoattractant along wiht Brownian Motion
 def forceGen(ConcByCell,
              Origin,
-             SourceOfOrigin,
+             shape_factor,
              CellCoord,
              t,
              D,
@@ -154,7 +154,7 @@ def forceGen(ConcByCell,
     [Parameter description]
     ConcByCell:                 the concentration released by the cell
     Origin:                     the origin of chemoattractant source
-    SourceOfOrigin:             None = One end of simulation box in x axis, Center = the center of simulation box 
+    shape_factor:               = 1 for square > 1 for slab
     CellCoord:                  position of cells from pdb file 
     t:                          time
     D:                          diffusion rate 
@@ -181,7 +181,7 @@ def forceGen(ConcByCell,
     ytest = np.array([CellCoord[1]-searchingRange,CellCoord[1],CellCoord[1]+searchingRange])
 
     # the distance from the one end where ATP is being released
-    if SourceOfOrigin is None:
+    if shape_factor > 1:
         #rSource = np.array([abs(Origin[0]-xtest[0]),abs(Origin[0]-xtest[1]),abs(Origin[0]-xtest[2])])
         r0 = abs(Origin[0]-xtest[0])
         r1 = abs(Origin[0]-xtest[1])
@@ -194,9 +194,9 @@ def forceGen(ConcByCell,
         COarray = np.array([Conc_Origin0,Conc_Origin2,Conc_Origin1,Conc_Origin1,Conc_Origin1])
         #print(len(COarray))
 
-    elif SourceOfOrigin == 'Center':
-        xSource = np.array([(Origin[0]-x0),(Origin[0]-x1),(Origin[0]-x2)])**2
-        ySource = np.array([(Origin[1]-y0),(Origin[1]-y1),(Origin[1]-y2)])**2
+    elif shape_factor == 1 :
+        xSource = np.array([(Origin[0]-xtest[0]),(Origin[0]-xtest[1]),(Origin[0]-xtest[2])])**2
+        ySource = np.array([(Origin[1]-ytest[0]),(Origin[1]-ytest[1]),(Origin[1]-ytest[2])])**2
         rSource = np.sqrt(np.array([xSource[0]+ySource[1],xSource[2]+ySource[1],xSource[1]+ySource[0],xSource[0]+ySource[2],xSource[1]+ySource[1]]))
         COarray = ConcByOrigin(rSource,t,D,oriConc,state,Origin)
 
@@ -251,23 +251,7 @@ def forceGen(ConcByCell,
             proby1[nthCell] = 1
         elif np.random.normal(dy,abs(dy)*2) <= 0:
             proby1[nthCell] = -1
-        
-        # Determining in X direction force
-        #xp = xprob[nthCell]
-        #xp = np.random.normal(dx,abs(dx)*10)
-        #DispX = xp
-        #DispX = dx*xp
-        
-        # Determining in Y direction force
-        #yp = yprob[nthCell]
-        #yp = np.random.normal(dy,abs(dy)*10)
-        #DispY = yp
-        #DispY = dy*yp
-                
-        #FVectorX[nthCell] = DisplacementScaleByConc*(DispX + xrand[nthCell]*0.015)*ConcTotal[4]
-        #FVectorY[nthCell] = DisplacementScaleByConc*(DispY + yrand[nthCell]*0.015)*ConcTotal[4]
-        #FVectorZ[nthCell] = 0
-    
+           
     Ix = odes['Ix'] 
     Iy = odes['Iy'] 
     DMx = odes['DMx'] 

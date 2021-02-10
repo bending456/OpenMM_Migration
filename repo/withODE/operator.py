@@ -3,23 +3,23 @@ import numpy as np
 import yaml
 import time as timer
 
-time = 20000
-DispScale = 10 #2500
-highlim = 100
+time = 200000
+DispScale = 100 #2500
+highlim = 50
 the_len_of_1st_box = 0 #highlim*3
 repeat = 1
-cellconc = 0.05
-oriConc = 5.0
-restingratio1 = 0.5
-restingratio2 = [0.5]#,0.5,0.9]
+cellconc = 0.005
+oriConc = 1.0
+restingratio1 = 0.9
+restingratio2 = [0.1] #,0.5,0.9]
 shape = 'slab'       # slab - work with SourceOfOrigin = None or square - work with SourceOfOrigin = Center 
 DiffState = 'error'  # error (for error function), steady, or linear 
-DiffRate = 0.5
+DiffRate = 0.1
 kd = oriConc*0.8 
 
 
-density_list1 = [25]
-density_list2 = [25]#,50,100]
+density_list1 = [50]
+density_list2 = [50]#,50,100]
 
 no_of_series_sim = len(density_list1)*len(density_list2)
 

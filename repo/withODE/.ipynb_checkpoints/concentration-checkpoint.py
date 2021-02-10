@@ -148,7 +148,8 @@ def forceGen(ConcByCell,
              cellConc,
              oriConc,
              state,
-             odes):
+             odes,
+             time_step):
     '''
     [Parameter description]
     ConcByCell:                 the concentration released by the cell
@@ -276,8 +277,15 @@ def forceGen(ConcByCell,
     
     #probx1 = np.random.normal(deltaX,abs(deltaX)*2)
     #proby1 = np.random.normal(deltaY,abs(deltaY)*2)
-    dirFacX1 = probx1 #/abs(probx1)
-    dirFacY1 = proby1 #/abs(proby1)
+    if dx <= 1e-14:
+        dirFacX1 = 1
+    else:
+        dirFacX1 = np.random.normal(dx,abs(dx)*2) #/abs(probx1)
+    
+    if dy <= 1e-14:
+        dirFacY1 = 1
+    else:
+        dirFacY1 = np.random.normal(dy,abs(dy)*2) #/abs(proby1)
     
     xrand = np.random.normal(0,0.5,NoOfCell)
     yrand = np.random.normal(0,0.5,NoOfCell)
@@ -285,14 +293,15 @@ def forceGen(ConcByCell,
     dirFacY2 = yrand/abs(yrand)
     
     
-    Inewx = Ix + ((0.01*DMx + 0.01*UMx) - (Conc*0.1 + deltaX*0.5)*Ix)*0.002 
-    Inewy = Iy + ((0.01*DMy + 0.01*UMy) - (Conc*0.1 + deltaY*0.5)*Iy)*0.002 
-    DMnewx = DMx + (deltaX*0.5*Ix - 0.01*DMx)*0.002
-    DMnewy = DMy + (deltaY*0.5*Iy - 0.01*DMy)*0.002
-    UMnewx = UMx + (Conc*0.1*Ix - (0.01 - 0.005)*UMx)*0.002
-    UMnewy = UMy + (Conc*0.1*Iy - (0.01 - 0.005)*UMy)*0.002
-    FVectorX = 300*DMnewx*dirFacX1 + UMnewx*dirFacX2*10
-    FVectorY = 300*DMnewy*dirFacY1 + UMnewy*dirFacY2*10
+    Inewx = Ix + ((0.01*DMx + 0.01*UMx) - (Conc*0.1 + deltaX*0.5)*Ix)*time_step 
+    Inewy = Iy + ((0.01*DMy + 0.01*UMy) - (Conc*0.1 + deltaY*0.5)*Iy)*time_step
+    DMnewx = DMx + (deltaX*0.5*Ix - 0.01*DMx)*time_step
+    DMnewy = DMy + (deltaY*0.5*Iy - 0.01*DMy)*time_step
+    UMnewx = UMx + (Conc*0.1*Ix - (0.01 - 0.005)*UMx)*time_step
+    UMnewy = UMy + (Conc*0.1*Iy - (0.01 - 0.005)*UMy)*time_step
+    FVectorX = DisplacementScaleByConc*(DMnewx*dirFacX1/abs(dirFacX1) + UMnewx*dirFacX2*0.01)
+    FVectorY = DisplacementScaleByConc*(DMnewy*dirFacY1/abs(dirFacY1) + UMnewy*dirFacY2*0.01)
+    #print('dirX',dirFacX1,'dirY',dirFacY1)
     
     odesNew = {'Ix': Inewx,
                'Iy': Inewy,

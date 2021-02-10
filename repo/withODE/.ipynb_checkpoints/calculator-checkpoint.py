@@ -162,7 +162,7 @@ def genCellCoord3D(NoCell1,
     migration_factor = np.zeros(total_num_cells)
     coordtoYaml = {}
     minDist = Rlim
-    bumper = 10 # this will prevent the placement beyond the actual dimension you assinged
+    bumper = 1 # this will prevent the placement beyond the actual dimension you assinged
     
     ## First box ##
     ### Configuring dimension where particles are placed
@@ -184,7 +184,7 @@ def genCellCoord3D(NoCell1,
         
     minX1 = lowx + bumper # in angstrom
     # --- Y axis ---
-    maxY1 = highy - bumper 
+    maxY1 = highy*5 - bumper 
     minY1 = lowy + bumper 
 
     numP1 = 0
@@ -238,7 +238,7 @@ def genCellCoord3D(NoCell1,
     maxX2 = CentoR*2 - bumper # in angstrom 
     minX2 = CentoR + bumper # in angstrom
     # --- Y axis ---
-    maxY2 = highy - bumper 
+    maxY2 = highy*5 - bumper 
     minY2 = lowy + bumper 
 
     numP2 = 0
@@ -319,7 +319,8 @@ def calcForce(positions,
               auto_factor,
               state,
               ConcByCell,
-              odes):
+              odes,
+              step_size):
     '''
     [Parameter Description]
     positions:               position of cells from pdb file 
@@ -390,7 +391,8 @@ def calcForce(positions,
                                               cellConc,
                                               oriConc,
                                               state,
-                                              odes)    
+                                              odes,
+                                              step_size)    
        
     return fvX, fvY, fvZ, ConcbyCell, odesnew
 

@@ -137,7 +137,8 @@ def genCellCoord3D(NoCell1,
                    actMig,
                    restAuto,
                    actAuto,
-                   shapefactor):
+                   shapefactor,
+                   NoParticleZone):
     '''
     [Parameter Description]
     NoCell1:        a total number of cells in the 1st half of box 
@@ -164,29 +165,8 @@ def genCellCoord3D(NoCell1,
     minDist = Rlim
     bumper = 1 # this will prevent the placement beyond the actual dimension you assinged
     
-    ## First box ##
-    ### Configuring dimension where particles are placed
-    # --- X axis ---
-    if CentoR > 0:
-        if CentoR > highx:
-            print("The length of 1st half box should be smaller than the total length of simulation box")
-            print("[CentoR < highx], Recommended to be less than half of a total length of simulation box") 
-            sys.exit(0)
-        elif CentoR < highx and CentoR > bumper:
-            maxX1 = CentoR - bumper # in angstrom
-        elif CentoR < bumper:
-            print("CentoR must be bigger than the bumper size (=10)")
-            sys.exit(0)
-    elif CentoR == 0:
-        CentoR = highx/shapefactor
-        maxX1 = CentoR-bumper
-        
-        
-    minX1 = lowx + bumper # in angstrom
-    # --- Y axis ---
-    maxY1 = highy*5 - bumper 
-    minY1 = lowy + bumper 
-
+    ### Cell Population Information 
+    #### First Compartment
     numP1 = 0
     maxP1 = NoCell1
     maxRestingP1 = int(NoCell1*restingRatio1)
@@ -195,52 +175,7 @@ def genCellCoord3D(NoCell1,
     xo = np.zeros(NoCell1)
     yo = np.zeros(NoCell1)
     
-    #print(maxP1)
-    while numP1 < maxP1 and loopcounter1 < maxIter1:
-        xpossible = randint(minX1,maxX1)
-        ypossible = randint(minY1,maxY1)
-        if numP1 == 0:
-            xo[numP1] = xpossible
-            yo[numP1] = ypossible
-            # -- marking state of cell -- #
-            marker.append('resting')
-            migration_factor[numP1] = restMig
-            autocrine_factor[numP1] = restAuto
-            # --------------------------- #
-            coord.append([xpossible,ypossible,0])
-            coordtoYaml[str(numP1)] = [xpossible/10,ypossible/10,0]
-            numP1 = numP1 + 1
-            continue
-
-        distance1 = np.sqrt((xo-xpossible)**2 + (yo-ypossible)**2)
-        if min(distance1) >= minDist:
-            xo[numP1] = xpossible
-            yo[numP1] = ypossible
-            coord.append([xpossible,ypossible,0])
-            coordtoYaml[str(numP1)] = [xpossible/10,ypossible/10,0]
-            # -- marking state of cell -- #
-            if numP1 <= maxRestingP1:
-                marker.append('resting')
-                migration_factor[numP1] = restMig
-                autocrine_factor[numP1] = restAuto
-            elif numP1 > maxRestingP1:
-                marker.append('activated')
-                migration_factor[numP1] = actMig
-                autocrine_factor[numP1] = actAuto
-            # --------------------------- #
-            numP1 = numP1 + 1
-        loopcounter1 = loopcounter1 + 1
-    
-    #print(numP1)
-    ## Second box ##
-    ### Configuring dimension where particles are placed
-    # --- X axis ---
-    maxX2 = CentoR*2 - bumper # in angstrom 
-    minX2 = CentoR + bumper # in angstrom
-    # --- Y axis ---
-    maxY2 = highy*5 - bumper 
-    minY2 = lowy + bumper 
-
+    #### Second Compartment
     numP2 = 0
     maxP2 = NoCell2
     maxRestingP2 = int(NoCell2*restingRatio2)
@@ -248,46 +183,195 @@ def genCellCoord3D(NoCell1,
     loopcounter2 = 1
     xo2 = np.zeros(NoCell2)
     yo2 = np.zeros(NoCell2)
-    #print(maxP2)    
-    while numP2 < maxP2 and loopcounter2 < maxIter2:
-        xpossible = randint(minX2,maxX2)
-        ypossible = randint(minY2,maxY2)
-        if numP2 == 0:
-            xo2[numP2] = xpossible
-            yo2[numP2] = ypossible
-            # -- marking state of cell -- #
-            marker.append('resting')
-            migration_factor[numP1+numP2] = restMig
-            autocrine_factor[numP1+numP2] = restAuto
-            # --------------------------- #
-            coord.append([xpossible,ypossible,0])
-            coordtoYaml[str(numP1+numP2)] = [xpossible/10,ypossible/10,0]
-            numP2 = numP2 + 1
-            continue
-
-        distance1 = np.sqrt((xo2-xpossible)**2 + (yo2-ypossible)**2)
-        if min(distance1) >= minDist:
-            xo2[numP2] = xpossible
-            yo2[numP2] = ypossible
-            coord.append([xpossible,ypossible,0])
-            coordtoYaml[str(numP1+numP2)] = [xpossible/10,ypossible/10,0]
-            # -- marking state of cell -- #
-            if numP2 <= maxRestingP2:
+    
+    ### Configuring dimension where particles are placed
+    if shapefactor > 1: # This means it is slab structure
+        CentoR = highx/(shapefactor)
+        modhighy = highy*(shapefactor)
+        
+        maxX1 = CentoR - bumper
+        minX1 = lowx + bumper
+        maxY1 = modhighy - bumper 
+        minY1 = lowy + bumper 
+        
+        maxX2 = CentoR*2 - bumper # in angstrom 
+        minX2 = CentoR + bumper # in angstrom
+        maxY2 = maxY1 
+        minY2 = minY1 
+        
+        # Placing cells in the FIRST compartment
+        while numP1 < maxP1 and loopcounter1 < maxIter1:
+            xpossible = randint(minX1,maxX1)
+            ypossible = randint(minY1,maxY1)
+            
+            if numP1 == 0:
+                xo[numP1] = xpossible
+                yo[numP1] = ypossible
+                # -- marking state of cell -- #
+                marker.append('resting')
+                migration_factor[numP1] = restMig
+                autocrine_factor[numP1] = restAuto
+                # --------------------------- #
+                coord.append([xpossible,ypossible,0])
+                coordtoYaml[str(numP1)] = [xpossible/10,ypossible/10,0]
+                numP1 = numP1 + 1
+                continue
+            
+            distance1 = np.sqrt((xo-xpossible)**2 + (yo-ypossible)**2)
+            
+            if min(distance1) >= minDist:
+                xo[numP1] = xpossible
+                yo[numP1] = ypossible
+                coord.append([xpossible,ypossible,0])
+                coordtoYaml[str(numP1)] = [xpossible/10,ypossible/10,0]
+                # -- marking state of cell -- #
+                if numP1 <= maxRestingP1:
+                    marker.append('resting')
+                    migration_factor[numP1] = restMig
+                    autocrine_factor[numP1] = restAuto
+                elif numP1 > maxRestingP1:
+                    marker.append('activated')
+                    migration_factor[numP1] = actMig
+                    autocrine_factor[numP1] = actAuto
+                # --------------------------- #
+                numP1 = numP1 + 1
+            loopcounter1 = loopcounter1 + 1
+            
+        # Placing cells in the SECOND compartment
+        while numP2 < maxP2 and loopcounter2 < maxIter2:
+            xpossible = randint(minX2,maxX2)
+            ypossible = randint(minY2,maxY2)
+        
+            if numP2 == 0:
+            
+                xo2[numP2] = xpossible
+                yo2[numP2] = ypossible
+                # -- marking state of cell -- #
                 marker.append('resting')
                 migration_factor[numP1+numP2] = restMig
                 autocrine_factor[numP1+numP2] = restAuto
-            elif numP2 > maxRestingP2:
-                marker.append('activated')
-                migration_factor[numP1+numP2] = actMig
-                autocrine_factor[numP1+numP2] = actAuto
-            # --------------------------- #
-            numP2 = numP2 + 1
-        loopcounter2 = loopcounter2 + 1
+                # --------------------------- #
+                coord.append([xpossible,ypossible,0])
+                coordtoYaml[str(numP1+numP2)] = [xpossible/10,ypossible/10,0]
+                numP2 = numP2 + 1
+                continue
+
+            distance1 = np.sqrt((xo2-xpossible)**2 + (yo2-ypossible)**2)
+                       
+            if min(distance1) >= minDist:
+                xo2[numP2] = xpossible
+                yo2[numP2] = ypossible
+                coord.append([xpossible,ypossible,0])
+                coordtoYaml[str(numP1+numP2)] = [xpossible/10,ypossible/10,0]
+                # -- marking state of cell -- #
+                if numP2 <= maxRestingP2:
+                    marker.append('resting')
+                    migration_factor[numP1+numP2] = restMig
+                    autocrine_factor[numP1+numP2] = restAuto
+                elif numP2 > maxRestingP2:
+                    marker.append('activated')
+                    migration_factor[numP1+numP2] = actMig
+                    autocrine_factor[numP1+numP2] = actAuto
+                # --------------------------- #
+                numP2 = numP2 + 1
+            loopcounter2 = loopcounter2 + 1
     
-    #print(numP2)
-    
-    #print(np.shape(coord))
-    #coord = coord/10
+    ################################################################
+    elif shapefactor == 1: # This means it is square structure
+        R0to1 = NoParticleZone
+        R1to2 = CentoR
+        R2to3 = highx
+        xori = highx/2
+        yori = highy/2
+        minX1 = xori - R1to2
+        maxX1 = xori + R1to2
+        minY1 = yori - R1to2
+        maxY1 = yori + R1to2
+        minX2 = xori - R2to3
+        maxX2 = xori + R2to3
+        minY2 = yori - R2to3
+        maxY2 = yori + R2to3
+
+        # Placing cells in the FIRST compartment
+        while numP1 < maxP1 and loopcounter1 < maxIter1:
+            xpossible = randint(minX1,maxX1)
+            ypossible = randint(minY1,maxY1)
+            
+            if numP1 == 0:
+                xo[numP1] = xpossible
+                yo[numP1] = ypossible
+                # -- marking state of cell -- #
+                marker.append('resting')
+                migration_factor[numP1] = restMig
+                autocrine_factor[numP1] = restAuto
+                # --------------------------- #
+                coord.append([xpossible,ypossible,0])
+                coordtoYaml[str(numP1)] = [xpossible/10,ypossible/10,0]
+                numP1 = numP1 + 1
+                continue
+            
+            distance1 = np.sqrt((xo-xpossible)**2 + (yo-ypossible)**2)
+            distance2 = np.sqrt((xpossible-xori)**2 + (ypossible-yori)**2)
+            
+            if min(distance1) >= minDist and distance2 >= R0to1 and distance2 <= R1to2:
+                xo[numP1] = xpossible
+                yo[numP1] = ypossible
+                coord.append([xpossible,ypossible,0])
+                coordtoYaml[str(numP1)] = [xpossible/10,ypossible/10,0]
+                # -- marking state of cell -- #
+                if numP1 <= maxRestingP1:
+                    marker.append('resting')
+                    migration_factor[numP1] = restMig
+                    autocrine_factor[numP1] = restAuto
+                elif numP1 > maxRestingP1:
+                    marker.append('activated')
+                    migration_factor[numP1] = actMig
+                    autocrine_factor[numP1] = actAuto
+                # --------------------------- #
+                numP1 = numP1 + 1
+            loopcounter1 = loopcounter1 + 1
+            
+        # Placing cells in the SECOND compartment
+        while numP2 < maxP2 and loopcounter2 < maxIter2:
+            xpossible = randint(minX2,maxX2)
+            ypossible = randint(minY2,maxY2)
+        
+            if numP2 == 0:
+                xo2[numP2] = xpossible
+                yo2[numP2] = ypossible
+                # -- marking state of cell -- #
+                marker.append('resting')
+                migration_factor[numP1+numP2] = restMig
+                autocrine_factor[numP1+numP2] = restAuto
+                # --------------------------- #
+                coord.append([xpossible,ypossible,0])
+                coordtoYaml[str(numP1+numP2)] = [xpossible/10,ypossible/10,0]
+                numP2 = numP2 + 1
+                continue
+
+            distance1 = np.sqrt((xo2-xpossible)**2 + (yo2-ypossible)**2)
+            distance2 = np.sqrt((xpossible-xori)**2 + (ypossible-yori)**2)
+                       
+            if min(distance1) >= minDist and distance2 >= R1to2 and distance2 <= R2to3 :
+                xo2[numP2] = xpossible
+                yo2[numP2] = ypossible
+                coord.append([xpossible,ypossible,0])
+                coordtoYaml[str(numP1+numP2)] = [xpossible/10,ypossible/10,0]
+                # -- marking state of cell -- #
+                if numP2 <= maxRestingP2:
+                    marker.append('resting')
+                    migration_factor[numP1+numP2] = restMig
+                    autocrine_factor[numP1+numP2] = restAuto
+                elif numP2 > maxRestingP2:
+                    marker.append('activated')
+                    migration_factor[numP1+numP2] = actMig
+                    autocrine_factor[numP1+numP2] = actAuto
+                # --------------------------- #
+                numP2 = numP2 + 1
+            loopcounter2 = loopcounter2 + 1
+                
+    #-----------------------------------------------------------------------------
+       
     for i in np.arange(NoCell1+NoCell2):
         for j in np.arange(3):
             coord[i][j] = coord[i][j]/10 ## <--- angstrom to nano meter conversion
@@ -306,7 +390,6 @@ def genCellCoord3D(NoCell1,
 def calcForce(positions,
               numberOfCells,
               Origin,
-              SourceOfOrigin,
               oriConc,
               cellConc,
               Diff,
@@ -320,13 +403,13 @@ def calcForce(positions,
               state,
               ConcByCell,
               odes,
-              step_size):
+              step_size,
+              shape_factor):
     '''
     [Parameter Description]
     positions:               position of cells from pdb file 
     numberOfCells:           total number of cells (num of cells in 1st half + num of cells in 2nd half)
     Origin:                  the origin of chemoattractant source 
-    SourceOfOrigin:          None = One end of simulation box in x axis, Center = the center of simulation box
     oriConc:                 the max concentration released from the source of chemoattractant
     cellConc:                the max concentration released by cells (determining the degree of intercellular communication)
     Diff:                    the diffusion rate of chemoattractant 
@@ -339,6 +422,7 @@ def calcForce(positions,
     auto_factor:             a list of autocrinic factors based on the state of cells 
     state:                   the characteristics of diffusion of chemoattractant: steady, error, or linear  
     ConcByCell:              the concentration accumulated by the attractant released from each individual cell
+    shape_factor:               = 1 for square > 1 for slab
     '''
     
     # Do some magic here that will return substrate field-related force acting on each particle
@@ -357,7 +441,7 @@ def calcForce(positions,
 
     DistCelltoOrigin          = conc.DistCelltoOrigin(recordedPositions,
                                                       Origin,
-                                                      SourceOfOrigin,
+                                                      shape_factor,
                                                       state)
 
     DistCelltoCell            = conc.DistCelltoCell(recordedPositions)
@@ -380,7 +464,7 @@ def calcForce(positions,
 
     fvX, fvY, fvZ, odesnew    = conc.forceGen(ConcbyCell,
                                               Origin,
-                                              SourceOfOrigin,
+                                              shape_factor,
                                               recordedPositions,
                                               t,
                                               Diff,
@@ -407,36 +491,7 @@ def calcStateVariable(numberOfCells,
     
     stateVarNew = stateVarOld + (0.001*(1-stateVarOld) - 0.001*ConcbyCell*stateVarOld)*0.002
     stateDepFactor = 1/(1+(0.2/stateVarNew)**5)
-    
-    #t = scipy.linspace(timeb,time,repeat)
-    #newstateVar = []
-    #stateDepFactor = []
-       
-    #for n in np.arange(numberOfCells):
-        
-        # This is exponential function that is fitted to the exponential function 
-        #if ConcbyCell[n] > 1:
-        #    coefficient = (1-1/ConcbyCell[n])
-        #elif ConcbyCell[n] > 0.9 - 1e-14 and ConcbyCell[n] < 1 + 1e-14:
-        #    coefficient = 0.5
-        #elif ConcbyCell[n] > 0.8 - 1e-14 and ConcbyCell[n] < 0.9 + 1e-14:
-        #    coefficient = 0.45
-        #elif ConcbyCell[n] > 0.7 - 1e-14 and ConcbyCell[n] < 0.8 + 1e-14:
-        #    coefficient = 0.4
-        #elif ConcbyCell[n] > 0.5 - 1e-14 and ConcbyCell[n] < 0.7 + 1e-14:
-        #    coefficient = 0.35
-        #elif ConcbyCell[n] > 0.2 - 1e-14 and ConcbyCell[n] < 0.5 + 1e-14:
-        #    coefficient = 0.3
-        #else:
-        #    coefficient = ConcbyCell[n]
-            
-    #    Var =  
-        #coefficient*np.exp(-0.001*time-0.001*ConcbyCell[n]*time) + 0.001/(0.001 + 0.001*ConcbyCell[n])
-        #print(ConcbyCell[n])
-    #    newstateVar.append(Var)
-    #    state = 1/(1+(0.2/Var)**5)
-    #    stateDepFactor.append(state)
-        
+           
     return stateVarNew, stateDepFactor
 
 def calcForceModified(numberOfCells,

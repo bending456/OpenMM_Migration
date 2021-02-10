@@ -30,12 +30,11 @@ def simulator(oriConc = 10,                     # the max concentration released
               searchingRange = 0.1,             # searching range around the cell 
               numOfCells1 = 50,                 # a total number of cells in the 1st section of simulation box 
               numOfCells2 = 50,                 # a total number of cells in the 2nd section of simulation box 
-              CentoR = 0,                       # this will determine the size of 1st section of simulation box in x axis
+              CentoR = None,                       # this will determine the size of 1st section of simulation box in x axis
               pdbFileName = 'temp',             # generated PDB file name 
               dcdfilename = 'test_output2',     # generated DCD file name 
               lowlimBoxlen =0,                  # in angstrom = 1/10 of nanometer (REMEMBER!!) ??? do I need this? 
               highlimBoxlen =1000,              # in angstrom = 1/10 of nanometer (REMEMBER!!)
-              SourceOfOrigin = None,            # None = One end of simulation box in x axis, Center = the center of simulation box 
               simLength = 10000,                # a total number of the simulation steps 
               dumpSize = 100,                   # dump size in the dcd generation process 
               restingRatio1 = 0.8,              # the proportion of resting cells in the overall population of cells in the 1st section 
@@ -45,7 +44,8 @@ def simulator(oriConc = 10,                     # the max concentration released
               restAuto = 10,                    # the degree of autocrinic release of resting cells: the larger, the less insensitive
               actAuto = 0.1,                    # the degree of autocrinic release of activated cells
               shape = 'slab',                   # shape of simulation box: either slab or square 
-              DiffState = 'steady'              # the characteristics of diffusion of chemoattractant: steady, error, or linear 
+              DiffState = 'steady',             # the characteristics of diffusion of chemoattractant: steady, error, or linear 
+              NoParticleZone = None
               ):
     
     # This will generate the random structure that makes no sence but will be processed again
@@ -58,19 +58,20 @@ def simulator(oriConc = 10,                     # the max concentration released
     dcdReporter = DCDReporter(dcdfilename+'.dcd', dumpingstep)
         
     # Simulation Box Dimension in angstrom
+    ## Slab case
     if shape == 'slab':
-        shape_factor = 5
+        shape_factor = 5 # What where this goes to.
+        dummy = (np.int(highlimBoxlen*shape_factor))/(10)
+        OriginOfExternalSignal = [dummy,0,0] # in nanometer 
+        # This indicates the far end of X-axis
+    ## Square case
     elif shape == 'square':
         shape_factor = 1
-    
-    ## Configure the coordinate of origin of external signal cascades  
-    if SourceOfOrigin is None:
-        dummy = (np.int(highlimBoxlen*shape_factor))/(10)
-        OriginOfExternalSignal = [dummy,0,0] # in nanometer
-    elif SourceOfOrigin == 'Center':
         dummy = (np.int(highlimBoxlen))/(10)
-        OriginOfExternalSignal = [dummy*shape_factor/2,dummy/2,0]
-    
+        OriginOfExternalSignal = [dummy/2,dummy/2,0]
+        # This indicates the center of simulation box
+   
+   
     # Defining the dimension of simulation box 
     x = [lowlimBoxlen,highlimBoxlen*shape_factor]
     y = [lowlimBoxlen,highlimBoxlen]
@@ -154,7 +155,8 @@ def simulator(oriConc = 10,                     # the max concentration released
                                                                        actMig,
                                                                        restAuto,
                                                                        actAuto,
-                                                                       shape_factor)
+                                                                       shape_factor,
+                                                                       NoParticleZone)
 
     for i in range(num_particles):
         # Populate the system with particles.
@@ -255,7 +257,6 @@ def simulator(oriConc = 10,                     # the max concentration released
         fvX, fvY, fvZ, ConcbyCell, odes = calc.calcForce(positions,
                                                          num_particles,
                                                          OriginOfExternalSignal,
-                                                         SourceOfOrigin,
                                                          oriConc,
                                                          cellConc,
                                                          Diff,
@@ -269,19 +270,13 @@ def simulator(oriConc = 10,                     # the max concentration released
                                                          DiffState,
                                                          ConcByCell,
                                                          odes,
-                                                         step_size)
+                                                         step_size,
+                                                         shape_factor)
         
-        #print(ConcbyCell[1])
         stateVariable, stateDepFactor = calc.calcStateVariable(num_particles, 
                                                                time_state, 
                                                                ConcbyCell, 
                                                                stateVariable) 
-        if num_iter == 1:
-            print('#********* The Beginning **********#')
-            print(fvX[1],fvY[1])
-        elif num_iter == Repeat - 1: 
-            print('#********* The Ending **********#')
-            print(fvX[1],fvY[1])
             
         forces_vec                    = calc.calcForceModified(num_particles, 
                                                                fvX, 
@@ -365,10 +360,9 @@ if __name__ == "__main__":
   numOfCells2 = 50
   lowlimBoxlen = 0 # in angstrom
   highlimBoxlen =1000 # in angstrom
-  SourceOfOrigin = None
   simLength = 10000
   dumpSize = 10
-  CentoR = 0
+  CentoR = None
   pdbFileName = 'temp'
   dcdfilename = 'test_output'
   oriConc = 1 
@@ -385,6 +379,7 @@ if __name__ == "__main__":
   actAuto = 0.01
   shape = 'slap'
   DiffState = 'steady'
+  NoParticleZone = None
     
   for i,arg in enumerate(sys.argv):
     # calls 'runParams' with the next argument following the argument '-validation'
@@ -457,8 +452,8 @@ if __name__ == "__main__":
     if arg=="-DiffState":
         DiffState = sys.argv[i+1]
         
-    if arg=="-SourceOfOrigin":
-        SourceOfOrigin = sys.argv[i+1]
+    if arg=="-NoParticleZone":
+        NoParticleZone = np.float(sys.argv[i+1])
 
 simulator(oriConc = oriConc, # diffusion rate of substance from the origin
           cellConc = cellConc,   # diffusion rate of substance from the cell
@@ -473,7 +468,6 @@ simulator(oriConc = oriConc, # diffusion rate of substance from the origin
           dcdfilename = dcdfilename,
           lowlimBoxlen = lowlimBoxlen, # in angstrom
           highlimBoxlen = highlimBoxlen, # in angstrom
-          SourceOfOrigin = SourceOfOrigin, 
           simLength = simLength,
           dumpSize = dumpSize,
           restingRatio1 = restingRatio1,
@@ -483,5 +477,6 @@ simulator(oriConc = oriConc, # diffusion rate of substance from the origin
           restAuto = restAuto,
           actAuto = actAuto,
           shape = shape,
-          DiffState = DiffState          
+          DiffState = DiffState,
+          NoParticleZone = NoParticleZone
           )

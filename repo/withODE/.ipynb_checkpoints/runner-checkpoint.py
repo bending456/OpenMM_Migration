@@ -83,9 +83,9 @@ def simulator(oriConc = 10,                     # the max concentration released
 
     # Parameters determining the dynamics of cells 
     MassOfCell = 200
-    RepulsiveScale = 0.01 # this can determine the distance among cells themselves
+    RepulsiveScale = 0.05 # this can determine the distance among cells themselves
     ### Simulation parameters
-    temperature = 295 #0.0    # K   <---- set to 0 to get rid of wiggling for now
+    temperature = 1.0 #0.0    # K   <---- set to 0 to get rid of wiggling for now
     frictionCoeff = 1.0  # 1/ps
     step_size = 0.002    # ps
     
@@ -170,7 +170,7 @@ def simulator(oriConc = 10,                     # the max concentration released
     integrator = BrownianIntegrator(temperature, frictionCoeff, step_size)
 
     # Create platform
-    platform = Platform.getPlatformByName('CPU')
+    platform = Platform.getPlatformByName('CUDA')
 
     # Create simulation
     simulation = Simulation(pdb.topology, system, integrator, platform)
@@ -268,7 +268,8 @@ def simulator(oriConc = 10,                     # the max concentration released
                                                          auto_factor,
                                                          DiffState,
                                                          ConcByCell,
-                                                         odes)
+                                                         odes,
+                                                         step_size)
         
         #print(ConcbyCell[1])
         stateVariable, stateDepFactor = calc.calcStateVariable(num_particles, 
@@ -381,7 +382,7 @@ if __name__ == "__main__":
   restMig = 10
   actMig = 1
   restAuto = 5
-  actAuto = 0.1
+  actAuto = 0.01
   shape = 'slap'
   DiffState = 'steady'
     

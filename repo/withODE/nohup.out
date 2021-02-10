@@ -1,0 +1,212 @@
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+#********* The Beginning **********#
+4.9999999999999884e-21 4.9999999999999884e-21
+#********* The Ending **********#
+30.494356010910977 32.71842878739356
+|-----SIMULATION INITIATED-----|
+|-----Single Run Job Statistics-----|
+|------ 4682.205841302872 secs ------|
+|------ 78.03676402171453 mins ------|
+|------ 1.3006127336952422 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 4683.205841302872 secs ------|
+|------ 78.0534306883812 mins ------|
+|------ 1.30089051147302 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 4682.206051111221 secs ------|
+|------ 78.03676762978236 mins ------|
+|------ 1.300612795551618 hrs ------|
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+#********* The Beginning **********#
+-4.9999999999999884e-21 -4.9999999999999884e-21
+#********* The Ending **********#
+36.19749089942663 34.95064292246271
+|-----SIMULATION INITIATED-----|
+|-----Single Run Job Statistics-----|
+|------ 4689.481632471085 secs ------|
+|------ 78.1580272078514 mins ------|
+|------ 1.3026337867975235 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 4690.481632471085 secs ------|
+|------ 78.17469387451807 mins ------|
+|------ 1.302911564575301 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 4689.4818387031555 secs ------|
+|------ 78.15803076028824 mins ------|
+|------ 1.3026338476604886 hrs ------|
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+#********* The Beginning **********#
+4.9999999999999884e-21 -4.9999999999999884e-21
+#********* The Ending **********#
+-31.787239651673776 -33.73141129281485
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+#********* The Beginning **********#
+-4.9999999999999884e-21 4.9999999999999884e-21
+#********* The Ending **********#
+37.3750365761764 36.19330969194748
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+#********* The Beginning **********#
+4.9999999999999884e-21 4.9999999999999884e-21
+#********* The Ending **********#
+-38.244850217783004 39.415360558716685
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+#********* The Beginning **********#
+-4.9999999999999884e-21 -4.9999999999999884e-21
+#********* The Ending **********#
+34.908098137568174 -33.0274926637611
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+#********* The Beginning **********#
+4.9999999999999884e-21 -4.9999999999999884e-21
+#********* The Ending **********#
+36.21616408778197 -34.400753795949754
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+#********* The Beginning **********#
+4.9999999999999884e-21 -4.9999999999999884e-21
+#********* The Ending **********#
+-36.28630563611739 -38.36771987676219
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+#********* The Beginning **********#
+-4.9999999999999884e-21 4.9999999999999884e-21
+#********* The Ending **********#
+28.26912870013657 -31.14732610118269
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+#********* The Beginning **********#
+4.9999999999999884e-21 -4.9999999999999884e-21
+#********* The Ending **********#
+34.61765945728509 -32.50815174480717
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+#********* The Beginning **********#
+-4.9999999999999884e-21 -4.9999999999999884e-21
+#********* The Ending **********#
+-31.082106848117753 33.8818564381228
+|-----SIMULATION INITIATED-----|
+|-----Single Run Job Statistics-----|
+|------ 70577.59695959091 secs ------|
+|------ 1176.2932826598485 mins ------|
+|------ 19.60488804433081 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 70578.59695959091 secs ------|
+|------ 1176.3099493265152 mins ------|
+|------ 19.605165822108585 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 70577.59716820717 secs ------|
+|------ 1176.2932862520217 mins ------|
+|------ 19.60488810824023 hrs ------|
+Traceback (most recent call last):
+  File "runner.py", line 13, in <module>
+    import calculator as calc
+  File "/home/bending456/Ben-Code/Modeling-Codes/Codes/OpenMM_Migration/repo/withODE/calculator.py", line 14, in <module>
+    import concentration as conc
+  File "/home/bending456/Ben-Code/Modeling-Codes/Codes/OpenMM_Migration/repo/withODE/concentration.py", line 298
+    DMnewy = DMy + (deltaY*0.5Iy - 0.01*DMy)*0.002
+                               ^
+SyntaxError: invalid syntax
+|-----SIMULATION INITIATED-----|
+|-----Single Run Job Statistics-----|
+|------ 0.4430358409881592 secs ------|
+|------ 0.0073839306831359865 mins ------|
+|------ 0.00012306551138559978 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 1.4430358409881592 secs ------|
+|------ 0.024050597349802652 mins ------|
+|------ 0.00040084328916337755 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 0.44315648078918457 secs ------|
+|------ 0.007386000951131185 mins ------|
+|------ 0.0001231008768081665 hrs ------|
+Terminated
+|-----SIMULATION INITIATED-----|
+|-----Single Run Job Statistics-----|
+|------ 291.35523653030396 secs ------|
+|------ 4.8559206088383995 mins ------|
+|------ 0.08093201014730665 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 292.35523653030396 secs ------|
+|------ 4.872587275505066 mins ------|
+|------ 0.08120978792508443 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 291.3554401397705 secs ------|
+|------ 4.855924113591512 mins ------|
+|------ 0.0809320702155431 hrs ------|
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+#********* The Beginning **********#
+-4.999999999999988e-22 -4.999999999999988e-22
+#********* The Ending **********#
+5.879913179243374 -5.0970624182878215
+|-----SIMULATION INITIATED-----|
+|-----Single Run Job Statistics-----|
+|------ 4629.119683980942 secs ------|
+|------ 77.1519947330157 mins ------|
+|------ 1.285866578883595 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 4630.119683980942 secs ------|
+|------ 77.16866139968236 mins ------|
+|------ 1.2861443566613728 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 4629.119886159897 secs ------|
+|------ 77.15199821392694 mins ------|
+|------ 1.285866638554467 hrs ------|
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+#********* The Beginning **********#
+-2.4999999999999942e-21 -2.4999999999999942e-21
+#********* The Ending **********#
+6.097568883162189 -5.566689512630623
+|-----SIMULATION INITIATED-----|
+|-----Single Run Job Statistics-----|
+|------ 4683.809154987335 secs ------|
+|------ 78.06348591645559 mins ------|
+|------ 1.301058098607593 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 4684.809154987335 secs ------|
+|------ 78.08015258312226 mins ------|
+|------ 1.3013358763853708 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 4683.809364080429 secs ------|
+|------ 78.06348950862885 mins ------|
+|------ 1.301058160132832 hrs ------|
