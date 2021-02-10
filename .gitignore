@@ -11,3 +11,4 @@ _site/repo/before_optimized/dummy.yml
 *.dcd
 *.pdb
 *.yaml
+*.csv
