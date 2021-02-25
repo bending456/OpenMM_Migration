@@ -1,0 +1,114 @@
+Traceback (most recent call last):
+  File "operator.py", line 3, in <module>
+    import yaml
+ImportError: No module named yaml
+Terminated
+Terminated
+Terminated
+|-----SIMULATION INITIATED-----|
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  50
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  100
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  150
+|-----Single Run Job Statistics-----|
+|------ 236.80718851089478 secs ------|
+|------ 3.9467864751815798 mins ------|
+|------ 0.06577977458635965 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 237.80718851089478 secs ------|
+|------ 3.9634531418482464 mins ------|
+|------ 0.06605755236413743 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 236.8073902130127 secs ------|
+|------ 3.946790067354838 mins ------|
+|------ 0.06577983597914377 hrs ------|
+  File "operator.py", line 33
+    density_list2 = [0.0010.004,0.008,0.012,0.016,0.02]
+                              ^
+SyntaxError: invalid syntax
+Terminated
+Terminated
+Terminated
+Terminated
+|-----SIMULATION INITIATED-----|
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  12
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  50
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  100
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  150
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  200
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  250
+|-----Single Run Job Statistics-----|
+|------ 85.04786944389343 secs ------|
+|------ 1.4174644907315572 mins ------|
+|------ 0.023624408178859288 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 86.04786944389343 secs ------|
+|------ 1.4341311573982238 mins ------|
+|------ 0.023902185956637064 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 85.04808187484741 secs ------|
+|------ 1.4174681385358174 mins ------|
+|------ 0.02362447182337443 hrs ------|
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+Terminated
+Terminated
+Terminated
+|-----SIMULATION INITIATED-----|
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  12
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  50
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  100
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  150
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  200
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  250
+|-----Single Run Job Statistics-----|
+|------ 77896.30309939384 secs ------|
+|------ 1298.2717183232307 mins ------|
+|------ 21.637861972053845 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 77897.30309939384 secs ------|
+|------ 1298.2883849898974 mins ------|
+|------ 21.638139749831623 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 77896.30330514908 secs ------|
+|------ 1298.2717218637467 mins ------|
+|------ 21.637862035234768 hrs ------|
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|

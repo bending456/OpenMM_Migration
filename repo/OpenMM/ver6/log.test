@@ -1,0 +1,23 @@
+Terminated
+Terminated
+Terminated
+|-----SIMULATION INITIATED-----|
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  50
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  100
+Number of Cells in the 1st Compartment =  50
+Number of Cells in the 2nd Compartment =  150
+|-----Single Run Job Statistics-----|
+|------ 2100.213145971298 secs ------|
+|------ 35.00355243285497 mins ------|
+|------ 0.5833925405475828 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 2101.213145971298 secs ------|
+|------ 35.02021909952164 mins ------|
+|------ 0.5836703183253606 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 2100.2133498191833 secs ------|
+|------ 35.00355606476466 mins ------|
+|------ 0.5833926026026408 hrs ------|

@@ -1,0 +1,43 @@
+|----- Structure Gen-----|
+|------ 0.0009090900421142578 secs ------|
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+|------- calibration -------|
+|------ 4.837442398071289 secs ------|
+DistCelltoOrigin
+|------ 6.127357482910156e-05 secs ------|
+[[ 3.4091475  10.97552586 12.91227245  0.        ]
+ [ 6.11209297  6.10775948  8.81851482  0.        ]
+ [-0.          0.         -0.          0.        ]]
+DistCelltoCell
+|------ 0.0005357265472412109 secs ------|
+ConcByOrigin
+|------ 3.910064697265625e-05 secs ------|
+ConcByCell
+|------ 8.916854858398438e-05 secs ------|
+forceGen
+|------ 0.0005998611450195312 secs ------|
+|------- Force Gen -------|
+|------ 0.0017805099487304688 secs ------|
+|------- State Variable -------|
+|------ 2.288818359375e-05 secs ------|
+|------- Modified Force -------|
+|------ 2.09808349609375e-05 secs ------|
+|-----SIMULATION INITIATED-----|
+Number of Cells in the 1st Compartment =  2
+Number of Cells in the 2nd Compartment =  2
+|-----Single Run Job Statistics-----|
+|------ 5.488752126693726 secs ------|
+|------ 0.09147920211156209 mins ------|
+|------ 0.001524653368526035 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 6.488752126693726 secs ------|
+|------ 0.10814586877822877 mins ------|
+|------ 0.0018024311463038128 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 5.488868236541748 secs ------|
+|------ 0.0914811929066976 mins ------|
+|------ 0.001524687475628323 hrs ------|
