@@ -1,0 +1,214 @@
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/dist-packages/simtk/openmm/openmm.py", line 12934, in <lambda>
+    __setattr__ = lambda self, name, value: _swig_setattr(self, State, name, value)
+KeyboardInterrupt
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "runner.py", line 541, in <module>
+    placement = placement
+  File "runner.py", line 251, in simulator
+    positions = simulation.context.getState(getPositions=True).getPositions()
+  File "/usr/local/lib/python3.6/dist-packages/simtk/openmm/openmm.py", line 10590, in getState
+    state = _openmm.Context_getState(self, types, enforcePeriodicBox, groups_mask)
+SystemError: <built-in function Context_getState> returned a result with an error set
+|-----SIMULATION INITIATED-----|
+Number of Cells in the 1st Compartment =  12
+Number of Cells in the 2nd Compartment =  10
+|-----Single Run Job Statistics-----|
+|------ 2.4492690563201904 secs ------|
+|------ 0.040821150938669844 mins ------|
+|------ 0.0006803525156444973 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 3.4492690563201904 secs ------|
+|------ 0.05748781760533651 mins ------|
+|------ 0.0009581302934222752 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 2.449441432952881 secs ------|
+|------ 0.040824111302693686 mins ------|
+|------ 0.0006804032458199395 hrs ------|
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+[0.93944491 0.94907526 0.94356942 0.94488987 0.96260698 0.94829294
+ 0.95865577 0.94688601 0.92484343 0.9668336  0.94969216 1.01059835
+ 1.01466059 0.99680032 0.99259006 0.98846832 0.99286711 0.99014509
+ 0.9983895  0.99255288 0.98884589 0.91975083]
+|-----SIMULATION INITIATED-----|
+Number of Cells in the 1st Compartment =  12
+Number of Cells in the 2nd Compartment =  10
+|-----Single Run Job Statistics-----|
+|------ 2432.5599756240845 secs ------|
+|------ 40.54266626040141 mins ------|
+|------ 0.6757111043400235 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 2433.5599756240845 secs ------|
+|------ 40.55933292706808 mins ------|
+|------ 0.6759888821178013 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 2432.560191631317 secs ------|
+|------ 40.542669979731244 mins ------|
+|------ 0.6757111679845386 hrs ------|
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+[0.95129548 0.92922873 0.94313367 0.95604569 0.96177283 0.98001417
+ 0.95064745 0.95539056 0.9386509  0.96820847 0.95232707 1.03986848
+ 1.03635975 1.00642294 1.00470385 1.00604885 1.00398145 1.0221832
+ 1.02545075 1.00885783 1.00793618 0.91602721]
+|-----SIMULATION INITIATED-----|
+Number of Cells in the 1st Compartment =  12
+Number of Cells in the 2nd Compartment =  10
+|-----Single Run Job Statistics-----|
+|------ 2398.155394077301 secs ------|
+|------ 39.969256567955014 mins ------|
+|------ 0.6661542761325836 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 2399.155394077301 secs ------|
+|------ 39.98592323462169 mins ------|
+|------ 0.6664320539103614 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 2398.155603170395 secs ------|
+|------ 39.96926017602285 mins ------|
+|------ 0.6661543377902772 hrs ------|
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+[1.04375801 1.04720653 1.06046243 1.03640819 1.050613   1.04456978
+ 1.02379377 1.03835351 1.0420297  1.05225608 1.03537564 1.12129225
+ 1.09392406 1.0009905  1.00823836 1.00320378 1.00959856 1.02438152
+ 1.00797753 1.02860174 1.01795773 0.91385026]
+|-----SIMULATION INITIATED-----|
+Number of Cells in the 1st Compartment =  12
+Number of Cells in the 2nd Compartment =  10
+|-----Single Run Job Statistics-----|
+|------ 2392.6715247631073 secs ------|
+|------ 39.877858746051785 mins ------|
+|------ 0.6646309791008631 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 2393.6715247631073 secs ------|
+|------ 39.89452541271846 mins ------|
+|------ 0.6649087568786409 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 2392.671739578247 secs ------|
+|------ 39.87786244948705 mins ------|
+|------ 0.6646310424142413 hrs ------|
+Terminated
+|-----SIMULATION INITIATED-----|
+Number of Cells in the 1st Compartment =  12
+Number of Cells in the 2nd Compartment =  10
+|-----Single Run Job Statistics-----|
+|------ 704.0500779151917 secs ------|
+|------ 11.734167965253194 mins ------|
+|------ 0.19556946608755324 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 705.0500779151917 secs ------|
+|------ 11.750834631919862 mins ------|
+|------ 0.19584724386533103 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 704.050288438797 secs ------|
+|------ 11.734171601136525 mins ------|
+|------ 0.19556952834129335 hrs ------|
+Terminated
+|-----SIMULATION INITIATED-----|
+Number of Cells in the 1st Compartment =  12
+Number of Cells in the 2nd Compartment =  10
+|-----Single Run Job Statistics-----|
+|------ 1095.4625935554504 secs ------|
+|------ 18.257709892590842 mins ------|
+|------ 0.30429516487651403 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 1096.4625935554504 secs ------|
+|------ 18.274376559257508 mins ------|
+|------ 0.3045729426542918 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 1095.4627962112427 secs ------|
+|------ 18.257713385423024 mins ------|
+|------ 0.30429522467984094 hrs ------|
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+[1.01796571 0.87171442 1.04403155 1.0636215  1.05338733 1.02241408
+ 1.02560878 0.91726651 1.04535178 0.95503905 0.9419333  0.77189481
+ 0.90876924 1.02974511 1.04000674 1.04725083 1.00706245 1.03309682
+ 1.03955188 1.04194941 1.04881985 0.88894893]
+|-----SIMULATION INITIATED-----|
+Number of Cells in the 1st Compartment =  12
+Number of Cells in the 2nd Compartment =  10
+|-----Single Run Job Statistics-----|
+|------ 2395.537139415741 secs ------|
+|------ 39.92561899026235 mins ------|
+|------ 0.6654269831710392 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 2396.537139415741 secs ------|
+|------ 39.942285656929016 mins ------|
+|------ 0.6657047609488169 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 2395.5373508930206 secs ------|
+|------ 39.92562263409297 mins ------|
+|------ 0.665427045557234 hrs ------|
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+[1.06242335 0.53245883 1.06453112 0.74773345 1.06617754 0.5094562
+ 1.04254142 1.04164825 1.06169274 0.52164815 1.02850066 0.43474674
+ 0.94253393 1.08472213 1.08156453 1.06441162 1.07765694 1.07401162
+ 1.08000768 1.06086442 1.07331519 0.87045791]
+|-----SIMULATION INITIATED-----|
+Number of Cells in the 1st Compartment =  12
+Number of Cells in the 2nd Compartment =  10
+|-----Single Run Job Statistics-----|
+|------ 2375.8647825717926 secs ------|
+|------ 39.59774637619655 mins ------|
+|------ 0.6599624396032757 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 2376.8647825717926 secs ------|
+|------ 39.61441304286321 mins ------|
+|------ 0.6602402173810535 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 2375.8649904727936 secs ------|
+|------ 39.59774995644887 mins ------|
+|------ 0.6599625007311503 hrs ------|
+Simulation is initiated
+REMARK  Using OpenMM platform CUDA
+|------ calibration initiated -----|
+|----- simulation initiated -----|
+Traceback (most recent call last):
+  File "runner.py", line 533, in <module>
+    placement = placement
+  File "runner.py", line 308, in simulator
+    stateVariable)
+ValueError: too many values to unpack (expected 7)
+|-----SIMULATION INITIATED-----|
+Number of Cells in the 1st Compartment =  12
+Number of Cells in the 2nd Compartment =  10
+|-----Single Run Job Statistics-----|
+|------ 5.902816534042358 secs ------|
+|------ 0.09838027556737264 mins ------|
+|------ 0.0016396712594562107 hrs ------|
+|--------------------------------|
+|-----Estimated Job Duration-----|
+|------ 6.902816534042358 secs ------|
+|------ 0.1150469422340393 mins ------|
+|------ 0.0019174490372339884 hrs ------|
+|-----SIMULATION COMPLETED-----|
+|------ 5.903043985366821 secs ------|
+|------ 0.09838418165842693 mins ------|
+|------ 0.0016397380166583591 hrs ------|

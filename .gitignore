@@ -12,3 +12,6 @@ _site/repo/before_optimized/dummy.yml
 *.pdb
 *.yaml
 *.csv
+repo/OpenMM/scratch
+repo/OpenMM/trial*
+repo/OpenMM/test*

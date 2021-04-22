@@ -1,0 +1,12 @@
+distribution of activated cells: gradient 
+concentration accumulated by neighboring cells (per cell): 2.3658586041770194e-14
+concentration accumulated by origin (per cell): 1.0507015175244229e-38
+concentration accumulated by all (per cell): 2.3658586041770194e-14
+version number 11 
+number of resting cells: 50 
+number of activated cells: 300 
+state Variable mechanism: off 
+distribution of activated cells: near 
+concentration accumulated by neighboring cells (per cell): 3.20981219029453e-14
+concentration accumulated by origin (per cell): 0.0
+concentration accumulated by all (per cell): 3.20981219029453e-14
