@@ -7,7 +7,7 @@ nav_order: 2
 This specific tutorial is meant to instructe those who are familiar with Linux/Unix environment with Python background. 
 Possibly more than my experience and skillset. 
 
-### 0. Install Prerequisites (CUDA, FLEX, BISON, SWIG, CMAKE 
+### 0. Install Prerequisites (CUDA, FLEX, BISON, SWIG, CMAKE, Doxygen 
 [Instruction Link - CUDA](https://medium.com/@exesse/cuda-10-1-installation-on-ubuntu-18-04-lts-d04f89287130)
 
 Installing FLEX
@@ -20,6 +20,12 @@ Installing BISON
     sudo apt-get install -y bison
 
 [Installing Doxygen](https://www.doxygen.nl/download.html)
+
+***Note*** recommend to install 1.8.X version rather than 1.9.X [Error Example](https://github.com/openmm/openmm/issues/3317)
+
+The following command should install 1.8.17
+
+    sudo apt install doxygen
 
 Installing OpenSSL
 
@@ -38,7 +44,6 @@ Installing OpenCL
 
 
 
-
 ### 1. Install OpenMM from source 
 [Official Link](http://docs.openmm.org/7.0.0/userguide/library.html#compiling-openmm-from-source-code)
 
@@ -47,6 +52,8 @@ Download the package from [Git Link](https://github.com/openmm/openmm.git)
     git clone https://github.com/openmm/openmm.git
 
 [Download the version it's been working with the current implementation](https://github.com/openmm/openmm/archive/refs/tags/7.4.1.tar.gz)
+
+[Compiling Instruction](http://docs.openmm.org/latest/userguide/library/02_compiling.html)
 
 ### 2. Install FeedInForce developed by Yehven 
 
