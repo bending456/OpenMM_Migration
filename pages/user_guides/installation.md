@@ -7,19 +7,55 @@ nav_order: 2
 This specific tutorial is meant to instructe those who are familiar with Linux/Unix environment with Python background. 
 Possibly more than my experience and skillset. 
 
-### 0. Install Prerequisites (CUDA, FLEX, BISON, SWIG, CMAKE, Doxygen 
-[Instruction Link - CUDA](https://medium.com/@exesse/cuda-10-1-installation-on-ubuntu-18-04-lts-d04f89287130)
+### 0. Install Prerequisites (CUDA, FLEX, BISON, SWIG, CMAKE, Doxygen, OpenCL, CCMAKE...)
 
-Installing FLEX
+#### a. Installing CUDA: [Instruction Link - CUDA](https://medium.com/@exesse/cuda-10-1-installation-on-ubuntu-18-04-lts-d04f89287130)
+
+After install, execute the following in the terminal:
+
+    nvidia-smi
+
+If the following error message is given
+
+    Failed to initialize NVML: Driver/library version mismatch
+
+Then, simply reboot the system 
+
+If it works just fine, then you should expect the following outcome in the terminal:
+
+    Thu Dec  9 16:06:49 2021
+    +-----------------------------------------------------------------------------+
+    | NVIDIA-SMI 495.29.05    Driver Version: 495.29.05    CUDA Version: 11.5     |
+    |-------------------------------+----------------------+----------------------+
+    | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+    | Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+    |                               |                      |               MIG M. |
+    |===============================+======================+======================|
+    |   0  NVIDIA GeForce ...  On   | 00000000:01:00.0  On |                  N/A |
+    | 36%   34C    P0    32W / 130W |    501MiB /  2000MiB |      3%      Default |
+    |                               |                      |                  N/A |
+    +-------------------------------+----------------------+----------------------+
+    +-----------------------------------------------------------------------------+
+    | Processes:                                                                  |
+    |  GPU   GI   CI        PID   Type   Process name                  GPU Memory |
+    |        ID   ID                                                   Usage      |
+    |=============================================================================|
+    |    0   N/A  N/A      1025      G   /usr/lib/xorg/Xorg                148MiB |
+    |    0   N/A  N/A      1562      G   /usr/lib/xorg/Xorg                163MiB |
+    |    0   N/A  N/A      2029      G   /usr/bin/gnome-shell              154MiB |
+    |    0   N/A  N/A      4281      G   ...AAAAAAAAA= --shared-files        2MiB |
+    +-----------------------------------------------------------------------------+ 
+
+#### b. Installing FLEX
 
     sudo apt-get update
     sudo apt-get install flex
 
-Installing BISON
+#### c. Installing BISON
 
-    sudo apt-get install -y bison
+    sudo apt-get install bison
 
-[Installing Doxygen](https://www.doxygen.nl/download.html)
+#### d. Installing Doxygen: [Instruction Link - Doxygen](https://www.doxygen.nl/download.html)
 
 ***Note*** recommend to install 1.8.X version rather than 1.9.X [Error Example](https://github.com/openmm/openmm/issues/3317)
 
@@ -27,18 +63,21 @@ The following command should install 1.8.17
 
     sudo apt install doxygen
 
-Installing OpenSSL
+#### e. Installing OpenSSL
 
     sudo apt-get install libssl-dev
 
+#### f. Installing CMAKE: [Instruction Link - CMAKE](https://cmake.org/install/)
 
-[Installing CMAKE](https://cmake.org/install/)
+#### g. Installing CCMAKE:
+    
+    sudo apt-get install cmake-curses-gui
 
-Installing SWIG
+#### h. Installing SWIG
 
     sudo apt install swig
 
-Installing OpenCL
+#### i. Installing OpenCL
 
     sudo apt install ocl-icd-opencl-dev
 
@@ -68,6 +107,25 @@ go to the plugin directory
     cmake CMakeLists.txt
 
 then edit your openMM directory section and cmake install prefix section with */path/to/OpenMM*
+
+For example:
+
+    CMAKE_BUILD_TYPE
+    CMAKE_INSTALL_PREFIX             /usr/local/openmm
+    CUDA_HOST_COMPILER               /usr/bin/cc
+    CUDA_SDK_ROOT_DIR                CUDA_SDK_ROOT_DIR-NOTFOUND
+    CUDA_TOOLKIT_ROOT_DIR            /usr/local/cuda-11
+    CUDA_USE_STATIC_CUDA_RUNTIME     ON
+    CUDA_rt_LIBRARY                  /usr/lib/x86_64-linux-gnu/librt.so
+    FeedIn_BUILD_CUDA_LIB            ON
+    FeedIn_BUILD_PYTHON_WRAPPERS     ON
+    OPENMM_DIR                       /usr/local/openmm
+    PYTHON_EXECUTABLE                PYTHON_EXECUTABLE-NOTFOUND
+    SWIG_EXECUTABLE                  /usr/bin/swig
+
+*If FeedIn_BUILD_PYTHON_WRAPPERS is not on, then the next step won't work.*
+
+
 Also, make sure your python version. 
 If python2 and 3 are installed in your system, then */usr/bin/python* for *python2* and */usr/bin/python3* for *python3*
 
@@ -77,7 +135,7 @@ or
 
 execute *make install* by the following 
 
-    make install 
+    sudo make install 
 
 if you are using python installed over system 
 
